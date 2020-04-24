@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
         // TODO actually check these values... maybe
         String password = passwordEditText.getText().toString();
         String username = usernameEditText.getText().toString();
-        Log.d("login", "Im trying to login!!");
         intent.putExtra(EXTRA_MESSAGE, username);
         startActivity(intent);
     }

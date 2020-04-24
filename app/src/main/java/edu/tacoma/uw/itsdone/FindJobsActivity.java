@@ -18,7 +18,7 @@ public class FindJobsActivity extends AppCompatActivity {
         String username = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
         // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.textView);
+        TextView textView = findViewById(R.id.textView4);
         textView.setText(username);
     }
 }
