@@ -2,12 +2,14 @@ package edu.tacoma.uw.itsdone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +50,10 @@ public class MainActivity extends AppCompatActivity {
         if (correctPassword) {
             intent.putExtra(EXTRA_MESSAGE, username);
             startActivity(intent);
+        } else {
+            Toast toast = Toast.makeText( getApplicationContext(),
+                    "incorrect password", Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 }
