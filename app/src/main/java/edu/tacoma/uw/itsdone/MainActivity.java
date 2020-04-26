@@ -25,29 +25,20 @@ public class MainActivity extends AppCompatActivity {
 
     /** Called when the user taps the GO! button */
     public void login(View view) {
-        boolean correctPassword = false;
         Intent intent = new Intent(this, FindJobsActivity.class);
-        EditText passwordEditText = findViewById(R.id.editText);
-        EditText usernameEditText = findViewById(R.id.editText2);
-
-        String password = passwordEditText.getText().toString();
-        String username = usernameEditText.getText().toString();
+        String password = ((EditText) findViewById(R.id.editText)).getText().toString();
+        String username = ((EditText) findViewById(R.id.editText2)).getText().toString();
 
         //check username and password
         SharedPreferences login = getApplicationContext().getSharedPreferences(username, 0);
-        if (login.contains("password")) {
-            correctPassword = login.getString("password", null).equals(password);
-            Log.e("already had a password", "LETS CHECK THE PASSWORD!");
-
-        } else {
+        if (!login.contains("password")) {
             SharedPreferences.Editor edit = login.edit();
             Log.e("create new password!!", "I HAD TO MAKE A NEW PASSWORD!");
             edit.putString("password", password);
             edit.commit();
-            correctPassword = true;
         }
 
-        if (correctPassword) {
+        if (password.equals(login.getString("password", null))) {
             intent.putExtra(EXTRA_MESSAGE, username);
             startActivity(intent);
         } else {
