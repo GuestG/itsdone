@@ -29,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
         String password = ((EditText) findViewById(R.id.editText)).getText().toString();
         String username = ((EditText) findViewById(R.id.editText2)).getText().toString();
 
-        //check username and password
+        //checks username and password
         SharedPreferences login = getApplicationContext().getSharedPreferences(username, 0);
         if (!login.contains("password")) {
+            //TODO have a button to create a new account
             SharedPreferences.Editor edit = login.edit();
             Log.e("create new password!!", "I HAD TO MAKE A NEW PASSWORD!");
             edit.putString("password", password);
