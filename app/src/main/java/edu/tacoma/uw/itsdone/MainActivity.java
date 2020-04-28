@@ -20,12 +20,20 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        SharedPreferences autoLogin = getApplicationContext().getSharedPreferences("autoLogin", 0);
+        if (!autoLogin.contains("autoLogin")) {
+            //TODO have a button to create a new account
+            SharedPreferences.Editor edit = autoLogin.edit();
+            edit.putBoolean("autoLogin", false);
+            edit.commit();
+        }
+        if (autoLogin.getBoolean("autoLogin", false)){
+            login(autoLogin.getString("username", null));
+        }
     }
 
     /** Called when the user taps the GO! button */
-    public void login(View view) {
-        Intent intent = new Intent(this, FindJobsActivity.class);
+    public void loginCheck(View view) {
         String password = ((EditText) findViewById(R.id.editText)).getText().toString();
         String username = ((EditText) findViewById(R.id.editText2)).getText().toString();
 
@@ -36,16 +44,29 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences.Editor edit = login.edit();
             Log.e("create new password!!", "I HAD TO MAKE A NEW PASSWORD!");
             edit.putString("password", password);
-            edit.commit();
+            edit.apply();
         }
 
         if (password.equals(login.getString("password", null))) {
-            intent.putExtra(EXTRA_MESSAGE, username);
-            startActivity(intent);
+            SharedPreferences autoLogin = getApplicationContext().getSharedPreferences("autoLogin", 0);
+            SharedPreferences.Editor edit = autoLogin.edit();
+            edit.putBoolean("autoLogin", true);
+            edit.putString("username", username);
+            edit.apply();
+            login(username);
         } else {
             Toast toast = Toast.makeText( getApplicationContext(),
                     "incorrect password", Toast.LENGTH_SHORT);
             toast.show();
         }
     }
+    /** acually does the loging in */
+    public void login(String username) {
+        Intent intent = new Intent(this, FindJobsActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, username);
+        startActivity(intent);
+        finish();
+    }
+
+
 }
