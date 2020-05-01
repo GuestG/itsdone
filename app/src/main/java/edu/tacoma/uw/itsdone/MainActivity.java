@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SharedPreferences autoLogin = getApplicationContext().getSharedPreferences("autoLogin", 0);
         if (!autoLogin.contains("autoLogin")) {
-            //TODO have a button to create a new account
             SharedPreferences.Editor edit = autoLogin.edit();
             edit.putBoolean("autoLogin", false);
             edit.commit();
@@ -39,14 +38,6 @@ public class MainActivity extends AppCompatActivity {
 
         //checks username and password
         SharedPreferences login = getApplicationContext().getSharedPreferences(username, 0);
-        if (!login.contains("password")) {
-            //TODO have a button to create a new account
-            SharedPreferences.Editor edit = login.edit();
-            Log.e("create new password!!", "I HAD TO MAKE A NEW PASSWORD!");
-            edit.putString("password", password);
-            edit.apply();
-        }
-
         if (password.equals(login.getString("password", null))) {
             SharedPreferences autoLogin = getApplicationContext().getSharedPreferences("autoLogin", 0);
             SharedPreferences.Editor edit = autoLogin.edit();
@@ -56,10 +47,11 @@ public class MainActivity extends AppCompatActivity {
             login(username);
         } else {
             Toast toast = Toast.makeText( getApplicationContext(),
-                    "incorrect password", Toast.LENGTH_SHORT);
+                    "Incorrect Username or Password", Toast.LENGTH_SHORT);
             toast.show();
         }
     }
+
     /** acually does the loging in */
     public void login(String username) {
         Intent intent = new Intent(this, FindJobsActivity.class);
@@ -67,6 +59,26 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    /** creates an account */
+    public void createAccount(View view) {
+        String toastString = "Account Created!";
+        String password = ((EditText) findViewById(R.id.editText)).getText().toString();
+        String username = ((EditText) findViewById(R.id.editText2)).getText().toString();
+        SharedPreferences login = getApplicationContext().getSharedPreferences(username, 0);
+        if (!login.contains("password")) {
+            SharedPreferences.Editor edit = login.edit();
+            edit.putString("password", password);
+            edit.apply();
+        } else {
+            toastString = "Account Already Exists";
+        }
+        Toast toast = Toast.makeText( getApplicationContext(),
+                toastString, Toast.LENGTH_SHORT);
+        toast.show();
+
+    }
+
 
 
 }

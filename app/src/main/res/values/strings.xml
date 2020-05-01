@@ -2,6 +2,7 @@
     <string name="app_name">It\'s Done</string>
     <string name="enter_username">username</string>
     <string name="enter_password">password</string>
+    <string name="create_account">Create New Account!</string>
     <string name="button_login">Go!</string>
     <string name="button_logout">Logout</string>
 </resources>
