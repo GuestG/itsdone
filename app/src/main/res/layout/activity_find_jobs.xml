@@ -21,143 +21,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="137dp"
-                android:layout_height="67dp"
-                android:layout_marginStart="56dp"
-                android:layout_marginLeft="56dp"
-                android:layout_marginTop="140dp"
-                android:text="TextView" />
-
-            <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-            <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-            <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-            <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
+            <fragment
+                android:id = "@+id/fragment1"
+                android:name = "edu.tacoma.uw.itsdone.JobsListFrag"
+                android:layout_width="match_parent"
+                android:layout_height="741dp"/>
         </LinearLayout>
     </ScrollView>
 

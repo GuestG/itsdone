@@ -20,10 +20,10 @@ public class FindJobsActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.textView4);
+        //TextView textView = findViewById(R.id.textView4);
 
-        textView.setText(getApplicationContext().getSharedPreferences("autoLogin", 0)
-                .getString("username", null));
+        //textView.setText(getApplicationContext().getSharedPreferences("autoLogin", 0)
+                //.getString("username", null));
 
 
     }
