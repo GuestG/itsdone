@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".FindJobsActivity">
 
     <ScrollView
         android:layout_width="405dp"
@@ -21,143 +21,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-
-                        <TextView
-                            android:layout_width="137dp"
-                            android:layout_height="67dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="104dp"
-                            android:layout_marginRight="104dp"
-                            android:text="Hello World Scroll!!"
-                            tools:text="Hello World Scroll!!" />
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="137dp"
-                android:layout_height="67dp"
-                android:layout_marginStart="56dp"
-                android:layout_marginLeft="56dp"
-                android:layout_marginTop="140dp"
-                android:text="TextView" />
+            <fragment
+                android:id = "@+id/fragment1"
+                android:name = "edu.tacoma.uw.itsdone.JobsListFrag"
+                android:layout_width="match_parent"
+                android:layout_height="741dp"/>
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:onClick="logout"
+        android:text="@string/button_logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
