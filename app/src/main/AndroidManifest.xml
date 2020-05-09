@@ -9,9 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FindJobsActivity"
-            android:parentActivityName=".MainActivity">
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/actions" />
 
+        <activity
+            android:name=".FindJobsActivity"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
