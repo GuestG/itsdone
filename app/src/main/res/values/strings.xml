@@ -1,11 +1,18 @@
 <resources>
-    <string name="app_name">It\'s Done</string>
+    <string name="app_name">itsdone</string>
+    <string name="title_detail">Item Detail</string>
     <string name="enter_username">username</string>
     <string name="enter_password">password</string>
     <string name="create_account">Create New Account!</string>
     <string name="button_login">Go!</string>
     <string name="button_logout">Logout</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Add Course Fragment hints -->
+    <string name="enter_job_title_hint">Enter Job Title</string>
+    <string name="enter_job_short_desc_hint">Enter Job Description</string>
+    <string name="enter_job_long_desc_hint">Enter More Job Details</string>
+    <string name="enter_job_location_hint">Enter Job Location</string>
+    <string name="enter_job_price_hint">Enter Job Price</string>
+
+    <string name="btn_add_job">Add Job</string>
 </resources>

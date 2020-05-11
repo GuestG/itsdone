@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
     /** acually does the loging in */
     public void login(String username) {
-        Intent intent = new Intent(this, FindJobsActivity.class);
+        Intent intent = new Intent(this, JobListActivity.class);
         intent.putExtra(EXTRA_MESSAGE, username);
         startActivity(intent);
         finish();
