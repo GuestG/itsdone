@@ -10,35 +10,41 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:dividerHeight="1dp"
         />
 
     <LinearLayout
+        android:id="@+id/buttonBar"
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        style="@android:style/ButtonBar">
+        style="@android:style/ButtonBar"
+        >
 
         <Button
             android:id="@+id/AddJobButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add Job"
-            android:layout_weight = "0.2" />
+            android:layout_weight = "0.2"
+            style="?android:attr/borderlessButtonStyle" />
 
         <Button
             android:id="@+id/FindJobButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Find Job"
-            android:layout_weight = "0.2" />
+            android:layout_weight = "0.2"
+            style="?android:attr/borderlessButtonStyle"/>
 
         <Button
             android:id="@+id/ProfileButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Profile"
-            android:layout_weight = "0.2" />
+            android:layout_weight = "0.2"
+            style="?android:attr/borderlessButtonStyle"/>
     </LinearLayout>
 
 </RelativeLayout>
