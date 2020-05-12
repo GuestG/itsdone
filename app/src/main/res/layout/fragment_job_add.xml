@@ -35,6 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="250dp"
+        android:layout_marginBottom="100dp"
         android:hint="@string/enter_job_price_hint" />
 
 
