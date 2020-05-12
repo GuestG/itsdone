@@ -1,39 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".JobAddFragment">
+
     <EditText
         android:id="@+id/add_job_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:hint="@string/enter_job_title_hint" />
     <EditText
         android:id="@+id/add_job_short_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:hint="@string/enter_job_short_desc_hint" />
     <EditText
         android:id="@+id/add_job_long_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
         android:hint="@string/enter_job_long_desc_hint" />
     <EditText
         android:id="@+id/add_job_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
         android:hint="@string/enter_job_location_hint" />
     <EditText
         android:id="@+id/add_job_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="250dp"
         android:hint="@string/enter_job_price_hint" />
-    <Button
-        android:id="@+id/btn_add_job"
-        android:layout_width="wrap_content"
+
+
+    <LinearLayout
+        android:id="@+id/buttonBar"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="@string/btn_add_job" />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        style="@android:style/ButtonBar"
+        >
+
+        <Button
+            android:id="@+id/AddJobButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_weight = "0.2"
+            style="?android:attr/borderlessButtonStyle" />
+
+        <Button
+            android:id="@+id/btn_add_job"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/btn_add_job"
+            android:layout_weight = "0.2"
+            style="?android:attr/borderlessButtonStyle"/>
+
+    </LinearLayout>
+</RelativeLayout>
