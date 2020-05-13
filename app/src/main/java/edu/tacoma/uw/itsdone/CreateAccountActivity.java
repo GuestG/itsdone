@@ -2,27 +2,29 @@ package edu.tacoma.uw.itsdone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import edu.tacoma.uw.itsdone.model.Account;
 
+/**
+ * this is an activity that creates an account for the user
+ *
+ * @author Trevor Peters
+ * @version 1.0
+ * @since 2020-05-13
+ */
 public class CreateAccountActivity extends AppCompatActivity {
     private JSONObject mJobJSON;
     public static final String ADD_MEMBER = "ADD_MEMBER";
@@ -33,6 +35,11 @@ public class CreateAccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_account);
     }
 
+    /**
+     * adds the member to the database
+     *
+     * @param account account to be added
+     */
     public void addMember(Account account) {
         StringBuilder url = new StringBuilder(getString(R.string.register));
 
@@ -118,9 +125,13 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         }
     }
-    /** creates an account */
+
+    /**
+     * creates the account and passes it to the AddMember method.
+     *
+     * @param view
+     */
     public void createAccount(View view) {
-        String toastString = "Account Created!";
         String password = ((EditText) findViewById(R.id.password)).getText().toString();
         String username = ((EditText) findViewById(R.id.username)).getText().toString();
         String firstname = ((EditText) findViewById(R.id.first_name)).getText().toString();
@@ -129,10 +140,6 @@ public class CreateAccountActivity extends AppCompatActivity {
 
         Account account = new Account(firstname,lastname, username, email, password);
         addMember(account);
-
-//        Toast toast = Toast.makeText( getApplicationContext(),
-//                toastString, Toast.LENGTH_SHORT);
-//        toast.show();
 
     }
 }
