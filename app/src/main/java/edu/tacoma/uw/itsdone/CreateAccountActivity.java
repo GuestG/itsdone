@@ -26,7 +26,7 @@ import edu.tacoma.uw.itsdone.model.Account;
  * @since 2020-05-13
  */
 public class CreateAccountActivity extends AppCompatActivity {
-    private JSONObject mJobJSON;
+    private JSONObject mMemberJSON;
     public static final String ADD_MEMBER = "ADD_MEMBER";
 
     @Override
@@ -43,17 +43,17 @@ public class CreateAccountActivity extends AppCompatActivity {
     public void addMember(Account account) {
         StringBuilder url = new StringBuilder(getString(R.string.register));
 
-        mJobJSON = new JSONObject();
+        mMemberJSON = new JSONObject();
         try{
-            mJobJSON.put("first", account.getFirstName());
-            mJobJSON.put("last", account.getLastName());
-            mJobJSON.put("username", account.getUsername());
-            mJobJSON.put("email", account.getEmail());
-            mJobJSON.put("password", account.getPassword());
+            mMemberJSON.put("first", account.getFirstName());
+            mMemberJSON.put("last", account.getLastName());
+            mMemberJSON.put("username", account.getUsername());
+            mMemberJSON.put("email", account.getEmail());
+            mMemberJSON.put("password", account.getPassword());
             new AddMemberAsyncTask().execute(url.toString());
 
         } catch (JSONException e){
-            Toast.makeText(this,"Error with JSON creation on adding a job: " +
+            Toast.makeText(this,"Error with JSON creation on creating an account: " +
                             e.getMessage(),
                     Toast.LENGTH_LONG).show();
         }
@@ -75,8 +75,8 @@ public class CreateAccountActivity extends AppCompatActivity {
                             new OutputStreamWriter(urlConnection.getOutputStream());
 
                     // For Debugging
-                    Log.i(ADD_MEMBER, mJobJSON.toString());
-                    wr.write(mJobJSON.toString());
+                    Log.i(ADD_MEMBER, mMemberJSON.toString());
+                    wr.write(mMemberJSON.toString());
                     wr.flush();
                     wr.close();
 
@@ -110,6 +110,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 if (jsonObject.getBoolean("success")) {
                     Toast.makeText(getApplicationContext(), "Member Added successfully"
                             , Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Member couldn't be added: "
@@ -125,6 +126,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             }
         }
     }
+
 
     /**
      * creates the account and passes it to the AddMember method.

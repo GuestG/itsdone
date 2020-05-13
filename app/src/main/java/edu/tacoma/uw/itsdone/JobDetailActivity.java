@@ -100,11 +100,13 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
 
         mJobJSON = new JSONObject();
         try{
-            mJobJSON.put("jobCreatorID", job.getCreatorId());
+            int memberID = getApplicationContext().getSharedPreferences("userInfo", 0)
+                    .getInt("memberID", 0);
+            mJobJSON.put("jobCreatorID", memberID);
             mJobJSON.put("title", job.getTitle());
             mJobJSON.put("shortDesc", job.getShortDesc());
             mJobJSON.put("longDesc", job.getLongDesc());
-            mJobJSON.put("Location", job.getLocation()); //TODO should be place??
+            mJobJSON.put("place", job.getLocation()); //TODO should be place??
             mJobJSON.put("price", job.getPrice());
             new AddJobAsyncTask().execute(url.toString());
 
@@ -145,7 +147,7 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
                     }
 
                 } catch (Exception e) {
-                    response = "Unable to add the new course, Reason: "
+                    response = "Unable to add the new Job, Reason: "
                             + e.getMessage();
                 } finally {
                     if (urlConnection != null)
@@ -157,24 +159,24 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
 
         @Override
         protected void onPostExecute(String s) {
-            if (s.startsWith("Unable to add the new course")) {
+            if (s.startsWith("Unable to add the new Job")) {
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
                 return;
             }
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getBoolean("success")) {
-                    Toast.makeText(getApplicationContext(), "Course Added successfully"
+                    Toast.makeText(getApplicationContext(), "Job Added successfully"
                             , Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "Course couldn't be added: "
+                    Toast.makeText(getApplicationContext(), "Job couldn't be added: "
                                     + jsonObject.getString("error")
                             , Toast.LENGTH_LONG).show();
                     Log.e(ADD_JOB, jsonObject.getString("error"));
                 }
             } catch (JSONException e) {
-                Toast.makeText(getApplicationContext(), "JSON Parsing error on Adding course"
+                Toast.makeText(getApplicationContext(), "JSON Parsing error on Adding Job"
                                 + e.getMessage()
                         , Toast.LENGTH_LONG).show();
                 Log.e(ADD_JOB, e.getMessage());
