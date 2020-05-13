@@ -22,7 +22,7 @@ public class Job implements Serializable {
     public static final String TITLE = "title";
     public static final String SHORT_DESC = "shortdesc";
     public static final String LONG_DESC = "longdesc";
-    public static final String LOCATION = "location";
+    public static final String LOCATION = "place";
     public static final String PRICE = "price";
 
     public Job (String id, String cId, String title, String sDesc, String lDesc, String loc, String pr){

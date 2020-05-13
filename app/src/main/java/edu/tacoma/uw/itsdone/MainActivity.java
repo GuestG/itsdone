@@ -21,14 +21,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         SharedPreferences autoLogin = getApplicationContext().getSharedPreferences("autoLogin", 0);
-        if (!autoLogin.contains("autoLogin")) {
-            SharedPreferences.Editor edit = autoLogin.edit();
-            edit.putBoolean("autoLogin", false);
-            edit.commit();
-        }
-        if (autoLogin.getBoolean("autoLogin", false)){
-            login(autoLogin.getString("username", null));
-        }
+//        if (!autoLogin.contains("autoLogin")) {
+//            SharedPreferences.Editor edit = autoLogin.edit();
+//            edit.putBoolean("autoLogin", false);
+//            edit.commit();
+//        }
+//        if (autoLogin.getBoolean("autoLogin", false)){
+//            login(autoLogin.getString("username", null));
+//        }
     }
 
     /** Called when the user taps the GO! button */
@@ -62,20 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
     /** creates an account */
     public void createAccount(View view) {
-        String toastString = "Account Created!";
-        String password = ((EditText) findViewById(R.id.editText)).getText().toString();
-        String username = ((EditText) findViewById(R.id.editText2)).getText().toString();
-        SharedPreferences login = getApplicationContext().getSharedPreferences(username, 0);
-        if (!login.contains("password")) {
-            SharedPreferences.Editor edit = login.edit();
-            edit.putString("password", password);
-            edit.apply();
-        } else {
-            toastString = "Account Already Exists";
-        }
-        Toast toast = Toast.makeText( getApplicationContext(),
-                toastString, Toast.LENGTH_SHORT);
-        toast.show();
-
+        Intent intent = new Intent(this, CreateAccountActivity.class);
+        //intent.putExtra(EXTRA_MESSAGE, username);
+        startActivity(intent);
     }
 }

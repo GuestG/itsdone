@@ -104,7 +104,7 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             mJobJSON.put("title", job.getTitle());
             mJobJSON.put("shortDesc", job.getShortDesc());
             mJobJSON.put("longDesc", job.getLongDesc());
-            mJobJSON.put("Location", job.getLocation());
+            mJobJSON.put("Location", job.getLocation()); //TODO should be place??
             mJobJSON.put("price", job.getPrice());
             new AddJobAsyncTask().execute(url.toString());
 
