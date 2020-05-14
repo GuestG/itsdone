@@ -44,18 +44,19 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="322dp"
-        android:layout_height="583dp"
+        android:layout_width="226dp"
+        android:layout_height="452dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginLeft="92dp"
+        android:layout_marginEnd="93dp"
+        android:layout_marginRight="93dp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/itsDone" />
+        app:srcCompat="@drawable/itsdone" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
