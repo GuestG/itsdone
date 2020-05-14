@@ -6,4 +6,5 @@
     <color name="gradient1">#1d7cfc</color>
     <color name="gradient2">#f7ddc5</color>
     <color name="gradientBars">#519ee4</color>
+    <color name="transparent">#00000000</color>
 </resources>

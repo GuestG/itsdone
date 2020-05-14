@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">itsdone</string>
     <string name="title_detail">Item Detail</string>
-    <string name="create_account">Register Here</string>
+    <string name="create_account">Create Account</string>
     <string name="button_login">Login</string>
     <string name="button_logout">Logout</string>
 
