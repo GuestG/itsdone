@@ -48,9 +48,7 @@
         android:layout_marginLeft="55dp"
         android:layout_marginTop="500dp"
         android:layout_marginRight="56dp"
-        android:background="@color/clear"
-
-        >
+        android:background="@color/clear">
 
 
         <Button
@@ -59,9 +57,7 @@
             android:layout_height="match_parent"
             android:text="@string/btn_add_job"
             android:elevation="5dp"
-            android:background="@drawable/round_button"
-
-            />
+            android:background="@drawable/round_button" />
 
     </androidx.cardview.widget.CardView>
 </RelativeLayout>

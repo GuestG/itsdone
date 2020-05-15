@@ -54,7 +54,6 @@ public class JobListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Toast.makeText(getApplicationContext(), "starting activity", Toast.LENGTH_SHORT).show(); // debug
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_list);
 
