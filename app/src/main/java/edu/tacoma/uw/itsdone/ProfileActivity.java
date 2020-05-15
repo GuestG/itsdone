@@ -4,15 +4,33 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class ProfileActivity extends AppCompatActivity {
-
+    private JSONObject mMemberOutJSON;
+    private JSONObject mMemberInJSON;
+    private String mAccount = "ACCOUNT";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        getAccount();
     }
 
     public void logout(View view){
@@ -28,5 +46,91 @@ public class ProfileActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    /** Called when the user taps the GO! button */
+    public void getAccount() {
+        StringBuilder url = new StringBuilder(getString(R.string.account));
+        mMemberOutJSON = new JSONObject();
+        SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
+                getSharedPreferences("userInfo", 0);
+        try{
+            mMemberOutJSON.put("memberID", sharedPref.getInt(getString(R.string.memberID), 0));
+            new AccountAsyncTask().execute(url.toString());
+        } catch (JSONException e){
+            Toast.makeText(this,"Error with JSON creation on login: " +
+                            e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    private class AccountAsyncTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            String response = "";
+            HttpURLConnection urlConnection = null;
+            for (String url : urls) {
+                try {
+                    URL urlObject = new URL(url);
+                    urlConnection = (HttpURLConnection) urlObject.openConnection();
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestProperty("Content-Type", "application/json");
+                    urlConnection.setDoOutput(true);
+                    OutputStreamWriter wr =
+                            new OutputStreamWriter(urlConnection.getOutputStream());
+
+                    // For Debugging
+                    Log.i(mAccount, mMemberOutJSON.toString());
+                    wr.write(mMemberOutJSON.toString());
+                    wr.flush();
+                    wr.close();
+
+                    InputStream content = urlConnection.getInputStream();
+
+                    BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
+                    String s = "";
+                    while ((s = buffer.readLine()) != null) {
+                        response += s;
+                    }
+
+                } catch (Exception e) {
+                    response = "Unable to add the new Member, Reason: "
+                            + e.getMessage();
+                } finally {
+                    if (urlConnection != null)
+                        urlConnection.disconnect();
+                }
+            }
+            return response;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if (s.startsWith("Unable to add the new Member")) {
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                return;
+            }
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+                mMemberInJSON = jsonObject;
+                populateTextViews();
+            } catch (JSONException e) {
+                Toast.makeText(getApplicationContext(), "JSON Parsing error on Adding Member"
+                                + e.getMessage()
+                        , Toast.LENGTH_LONG).show();
+                Log.e(mAccount, e.getMessage());
+            }
+        }
+    }
+    public void populateTextViews() throws JSONException {
+        TextView emailText = findViewById(R.id.email);
+        TextView firstText = findViewById(R.id.first_name);
+        TextView lastText = findViewById(R.id.last_name);
+        TextView usernameText = findViewById(R.id.username);
+        emailText.setText(mMemberInJSON.getString("email"));
+        firstText.setText(mMemberInJSON.getString("firstname"));
+        lastText.setText(mMemberInJSON.getString("lastname"));
+        usernameText.setText(mMemberInJSON.getString("username"));
     }
 }

@@ -38,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
                 getSharedPreferences("userInfo", 0);
-        if (sharedPref.getBoolean("signed in", false)){
-            login(sharedPref.getString("username", null), sharedPref.getInt("membberID", 0));
+        if (sharedPref.getBoolean(getString(R.string.signed_in), false)){
+            login(sharedPref.getString(getString(R.string.username), null), sharedPref.getInt(getString(R.string.memberID), 0));
         }
     }
 
@@ -143,9 +143,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
                 getSharedPreferences("userInfo", 0);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("memberID", memberID);
-        editor.putString("username", username);
-        editor.putBoolean("signed in", true);
+        editor.putInt(getString(R.string.memberID), memberID);
+        editor.putString(getString(R.string.username), username);
+        editor.putBoolean(getString(R.string.signed_in), true);
         editor.commit();
 
         Intent intent = new Intent(this, JobListActivity.class);

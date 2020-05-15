@@ -101,7 +101,7 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         mJobJSON = new JSONObject();
         try{
             int memberID = getApplicationContext().getSharedPreferences("userInfo", 0)
-                    .getInt("memberID", 0);
+                    .getInt(getString(R.string.memberID), 0);
             mJobJSON.put("jobCreatorID", memberID);
             mJobJSON.put("title", job.getTitle());
             mJobJSON.put("shortDesc", job.getShortDesc());
