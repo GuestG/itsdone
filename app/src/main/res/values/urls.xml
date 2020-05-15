@@ -5,4 +5,6 @@
     <string name="register">https://backitsdoneend.herokuapp.com/register</string>
     <string name="login">https://backitsdoneend.herokuapp.com/login</string>
     <string name="account">https://backitsdoneend.herokuapp.com/account</string>
+    <string name="save_job">https://backitsdoneend.herokuapp.com/account</string>
+    <string name="unsave_job">https://backitsdoneend.herokuapp.com/account</string>
 </resources>
