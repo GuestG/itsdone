@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import edu.tacoma.uw.itsdone.model.Job;
@@ -32,6 +33,12 @@ public class JobDetailFragment extends Fragment {
      */
     private Job mJob;
 
+    private SaveListener mSaveListener;
+
+    public interface SaveListener {
+        public void saveJob(Job job);
+    }
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -41,6 +48,9 @@ public class JobDetailFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        mSaveListener = (SaveListener) getActivity();
+
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
@@ -49,6 +59,13 @@ public class JobDetailFragment extends Fragment {
             // to load content from a content provider.
             mJob = (Job) getArguments().getSerializable(ARG_ITEM_ID);
 
+//            Button saveJobBtn = findViewById(R.id.SaveJobButton);
+//            saveJobBtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    mSaveListener.saveJob(mJob);
+//                }
+//            });
         }
     }
 
@@ -68,6 +85,14 @@ public class JobDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.item_detail_price)).setText(
                     "Price: " + mJob.getPrice());
         }
+
+        Button saveButton = getView().findViewById(R.id.SaveJobButton);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSaveListener.saveJob(mJob);
+            }
+        });
 
         return rootView;
     }

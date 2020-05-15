@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
 
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -39,7 +40,7 @@ import edu.tacoma.uw.itsdone.model.Job;
  * @version 1.1
  * @since 5/15/2020
  */
-public class JobDetailActivity extends AppCompatActivity implements JobAddFragment.AddListener{
+public class JobDetailActivity extends AppCompatActivity implements JobAddFragment.AddListener, JobDetailFragment.SaveListener{
 
     private int mUserId;
     public static final String ADD_JOB = "ADD_JOB";
@@ -51,6 +52,8 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         setContentView(R.layout.activity_job_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
+
+
 
 
 
@@ -89,9 +92,24 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             }
         }
     }
+    @Override
+    public void saveJob(Job job){
+        Toast.makeText(this,"Saving Job", Toast.LENGTH_LONG).show();
+        StringBuilder url = new StringBuilder(getString(R.string.save_job));
 
-    public void saveJob(){
+        mJobJSON = new JSONObject();
+        try{
+            int memberID = getApplicationContext().getSharedPreferences("userInfo", 0)
+                    .getInt(getString(R.string.memberID), 0);
+            mJobJSON.put("memberID", memberID);
+            mJobJSON.put("jobID", job.getJobId());
+            new AddJobAsyncTask().execute(url.toString());
 
+        } catch (JSONException e){
+            Toast.makeText(this,"Error with JSON creation on adding a job: " +
+                            e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
