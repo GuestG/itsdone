@@ -34,6 +34,10 @@ import edu.tacoma.uw.itsdone.model.Job;
  * activity is only used on narrow width devices. On tablet-size devices,
  * item details are presented side-by-side with a list of items
  * in a {@link JobListActivity}.
+ *
+ * @author Trevor Peters
+ * @version 1.1
+ * @since 5/15/2020
  */
 public class JobDetailActivity extends AppCompatActivity implements JobAddFragment.AddListener{
 
@@ -45,8 +49,8 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_detail);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
+//        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -56,11 +60,11 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             }
         });
 
-        // Show the Up button in the action bar.
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+//        // Show the Up button in the action bar.
+//        ActionBar actionBar = getSupportActionBar();
+//        if (actionBar != null) {
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//        }
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity

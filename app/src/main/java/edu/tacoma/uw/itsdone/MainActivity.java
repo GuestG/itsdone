@@ -134,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
     /** creates an account */
     public void createAccount(View view) {
         Intent intent = new Intent(this, CreateAccountActivity.class);
-        //intent.putExtra(EXTRA_MESSAGE, username);
         startActivity(intent);
     }
 
