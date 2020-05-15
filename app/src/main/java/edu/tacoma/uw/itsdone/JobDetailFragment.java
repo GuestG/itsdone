@@ -16,10 +16,12 @@ import android.widget.TextView;
 import edu.tacoma.uw.itsdone.model.Job;
 
 /**
- * A fragment representing a single Item detail screen.
- * This fragment is either contained in a {@link JobListActivity}
- * in two-pane mode (on tablets) or a {@link JobDetailActivity}
- * on handsets.
+ * This fragment displays all info on the job, through the use of loading
+ * data from the database.
+ *
+ * @authors Gehry Guest
+ * @version 1.1
+ * @since 2020-05-15
  */
 public class JobDetailFragment extends Fragment {
     /**
