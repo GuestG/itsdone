@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -53,8 +52,7 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                saveJob();
             }
         });
 
@@ -94,6 +92,10 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         }
     }
 
+    public void saveJob(){
+
+    }
+
     @Override
     public void addJob(Job job) {
         StringBuilder url = new StringBuilder(getString(R.string.add_job));
@@ -106,7 +108,7 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             mJobJSON.put("title", job.getTitle());
             mJobJSON.put("shortDesc", job.getShortDesc());
             mJobJSON.put("longDesc", job.getLongDesc());
-            mJobJSON.put("place", job.getLocation()); //TODO should be place??
+            mJobJSON.put("place", job.getLocation());
             mJobJSON.put("price", job.getPrice());
             new AddJobAsyncTask().execute(url.toString());
 
