@@ -69,9 +69,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:textColor="#000000"
                 android:background="@drawable/round_button"
-                android:text="Profile" />
+                android:onClick="profile"
+                android:text="Profile"
+                android:textColor="#000000" />
 
         </LinearLayout>
 

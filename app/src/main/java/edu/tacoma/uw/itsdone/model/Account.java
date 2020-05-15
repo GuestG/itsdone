@@ -1,6 +1,8 @@
 package edu.tacoma.uw.itsdone.model;
 
 
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 

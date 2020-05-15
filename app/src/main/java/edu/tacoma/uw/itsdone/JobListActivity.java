@@ -37,6 +37,10 @@ import java.util.List;
  * lead to a {@link JobDetailActivity} representing
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
+ *
+ * @author Trevor Peters, Max
+ * @version 1.1
+ * @since 5/15/2020
  */
 public class JobListActivity extends AppCompatActivity {
 
@@ -233,5 +237,10 @@ public class JobListActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    public void profile(View view){
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
     }
 }
