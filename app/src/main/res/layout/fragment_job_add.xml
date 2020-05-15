@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/gradient"
@@ -11,57 +13,82 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:hint="@string/enter_job_title_hint" />
+        android:hint="@string/enter_job_title_hint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <EditText
         android:id="@+id/add_job_short_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:hint="@string/enter_job_short_desc_hint" />
+        android:layout_marginTop="25dp"
+        android:hint="@string/enter_job_short_desc_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_job_long_desc" />
+
     <EditText
         android:id="@+id/add_job_long_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:hint="@string/enter_job_long_desc_hint" />
+        android:layout_marginTop="25dp"
+        android:hint="@string/enter_job_long_desc_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_job_title" />
+
     <EditText
         android:id="@+id/add_job_location"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
-        android:hint="@string/enter_job_location_hint" />
+        android:layout_marginTop="25dp"
+        android:hint="@string/enter_job_location_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_job_short_desc" />
+
     <EditText
         android:id="@+id/add_job_price"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
-        android:layout_marginBottom="100dp"
-        android:hint="@string/enter_job_price_hint" />
-
+        android:layout_marginStart="-1dp"
+        android:layout_marginTop="25dp"
+        android:hint="@string/enter_job_price_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_job_location" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/addJobCardView"
         android:layout_width="300dp"
-        android:layout_height="40dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="55dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="55dp"
-        android:layout_marginTop="500dp"
-        android:layout_marginRight="56dp"
-        android:background="@color/clear"
 
-        >
+        android:layout_marginRight="56dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/clear"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_job_price"
+        app:layout_constraintVertical_bias="0.37">
 
 
         <Button
             android:id="@+id/btn_add_job"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/btn_add_job"
-            android:elevation="5dp"
+            android:layout_height="40dp"
             android:background="@drawable/round_button"
+            android:elevation="5dp"
+            android:text="@string/btn_add_job"
 
             />
 
     </androidx.cardview.widget.CardView>
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
