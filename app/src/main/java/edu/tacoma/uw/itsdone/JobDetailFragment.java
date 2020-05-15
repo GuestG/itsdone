@@ -86,7 +86,9 @@ public class JobDetailFragment extends Fragment {
                     "Price: " + mJob.getPrice());
         }
 
-        Button saveButton = getView().findViewById(R.id.SaveJobButton);
+        View v = inflater.inflate(R.layout.job_detail, container
+                , false);
+        Button saveButton = v.findViewById(R.id.save_job_button);
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

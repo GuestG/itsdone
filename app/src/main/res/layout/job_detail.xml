@@ -82,6 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/clear"
+                android:id="@+id/save_job_button"
                 android:text="Save Job" />
 
         </RelativeLayout>
