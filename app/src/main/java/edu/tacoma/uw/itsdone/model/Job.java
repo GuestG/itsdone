@@ -7,6 +7,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class representing a job. Users can create and accept jobs.
+ * Job has fields such as title, price, location, and others.
+ */
 public class Job implements Serializable {
 
     private String mJobId;
@@ -25,6 +29,16 @@ public class Job implements Serializable {
     public static final String LOCATION = "place";
     public static final String PRICE = "price";
 
+    /**
+     * Constructor for initializing fields
+     * @param id SQL primary key
+     * @param cId SQL key of job owner
+     * @param title string title of the job
+     * @param sDesc string short description of job
+     * @param lDesc string long description of job
+     * @param loc location of job
+     * @param pr price the owner is willing to pay for anyone wanting to complete the job.
+     */
     public Job (String id, String cId, String title, String sDesc, String lDesc, String loc, String pr){
         mJobId = id;
         mCreatorId = cId;
@@ -51,6 +65,12 @@ public class Job implements Serializable {
     public void setPrice(String s) { mPrice = s; }
     public void setLocation(String s) { mLocation = s; }
 
+    /**
+     * method for parsing a json file from database into a list of job objects.
+     * @param jobJson the json file
+     * @return returns a new list of jobs.
+     * @throws JSONException exception for if json parsing failed.
+     */
     public static List<Job> parseJobJson(String jobJson) throws JSONException {
         List<Job> jobList = new ArrayList<>();
         if (jobJson != null) {
