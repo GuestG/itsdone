@@ -52,14 +52,14 @@
         android:layout_marginEnd="93dp"
         android:layout_marginRight="93dp"
         android:layout_marginBottom="80dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintBottom_toTopOf="@+id/loginCardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/itsdone" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/loginCardView"
         android:layout_width="300dp"
         android:layout_height="40dp"
         android:layout_centerHorizontal="true"
@@ -70,7 +70,7 @@
         android:layout_marginRight="56dp"
         app:cardBackgroundColor="@color/gradientbackground2"
         app:cardCornerRadius="25dp"
-        app:cardElevation="2dp"
+        app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText">
@@ -91,6 +91,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/createAccountCardView"
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:layout_centerHorizontal="true"
@@ -101,7 +102,7 @@
         android:layout_marginRight="56dp"
         app:cardBackgroundColor="@color/gradientbackground2"
         app:cardCornerRadius="25dp"
-        app:cardElevation="1dp"
+        app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText">

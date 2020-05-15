@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@drawable/gradient"
     tools:context=".JobAddFragment">
 
@@ -40,37 +39,29 @@
         android:hint="@string/enter_job_price_hint" />
 
 
-    <LinearLayout
-        android:id="@+id/buttonBar"
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/cardview_shadow_end_color"
-        style="@android:style/ButtonBar"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/addJobCardView"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="500dp"
+        android:layout_marginRight="56dp"
+        android:background="@color/clear"
+
         >
 
-        <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:layout_weight = "0.2"
-            android:layout_marginRight="2.5dp"
-            android:background="@drawable/round_button"
-            style="?android:attr/borderlessButtonStyle"/>
 
         <Button
             android:id="@+id/btn_add_job"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:text="@string/btn_add_job"
-            android:layout_weight = "0.2"
-            android:layout_marginLeft="2.5dp"
+            android:elevation="5dp"
             android:background="@drawable/round_button"
-            style="?android:attr/borderlessButtonStyle"
+
             />
 
-    </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

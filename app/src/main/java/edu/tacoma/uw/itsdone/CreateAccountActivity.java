@@ -1,5 +1,6 @@
 package edu.tacoma.uw.itsdone;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.AsyncTask;
@@ -21,7 +22,7 @@ import edu.tacoma.uw.itsdone.model.Account;
 /**
  * this is an activity that creates an account for the user
  *
- * @author Trevor Peters
+ * @authors Trevor Peters, Gehry Guest
  * @version 1.0
  * @since 2020-05-13
  */
@@ -29,9 +30,17 @@ public class CreateAccountActivity extends AppCompatActivity {
     private JSONObject mMemberJSON;
     public static final String ADD_MEMBER = "ADD_MEMBER";
 
+    /**
+     * hides action bar and creates saved state, loading the activity_create_account.XML
+     * for the activity.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
         setContentView(R.layout.activity_create_account);
     }
 

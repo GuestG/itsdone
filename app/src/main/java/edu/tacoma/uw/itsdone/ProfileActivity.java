@@ -1,15 +1,15 @@
 package edu.tacoma.uw.itsdone;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,39 +22,56 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
- * launcher activity. this is also the login menu
+ * The central hub for all things about the current users profile!!
+ *
+ * @author Trevor Peters
+ * @version 1.0
+ * @since 5/15/2020
+ *
  */
-public class MainActivity extends AppCompatActivity {
-    private JSONObject mMemberJSON;
-    public static final String mLogin = "Login";
-
+public class ProfileActivity extends AppCompatActivity {
+    private JSONObject mMemberOutJSON;
+    private JSONObject mMemberInJSON;
+    private String mAccount = "ACCOUNT";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
-                getSharedPreferences("userInfo", 0);
-        //check if the use is already logged in
-        if (sharedPref.getBoolean(getString(R.string.signed_in), false)){
-            login(sharedPref.getString(getString(R.string.username), null), sharedPref.getInt(getString(R.string.memberID), 0));
-        }
+        setContentView(R.layout.activity_profile);
+        getAccount();
     }
 
+    /**
+     * logs the user out. sets the userInfo shared preference to default values
+     * @param view
+     */
+    public void logout(View view){
+        //TODO username & MemberID can accessed here
 
-    /** Called when the user taps the GO! button */
-    public void loginCheck(View view) {
-        StringBuilder url = new StringBuilder(getString(R.string.login));
-        String password = ((EditText) findViewById(R.id.editText)).getText().toString();
-        String username = ((EditText) findViewById(R.id.editText2)).getText().toString();
-        mMemberJSON = new JSONObject();
+        SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
+                getSharedPreferences("userInfo", 0);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("memberID", 0);
+        editor.putString("username", "");
+        editor.putBoolean("signed in", false);
+        editor.commit();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    /**
+     * get the account info from the database
+     */
+    public void getAccount() {
+        StringBuilder url = new StringBuilder(getString(R.string.account));
+        mMemberOutJSON = new JSONObject();
+        SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
+                getSharedPreferences("userInfo", 0);
         try{
-            mMemberJSON.put("username", username);
-            mMemberJSON.put("password", password);
-            new LoginAsyncTask().execute(url.toString());
-
+            mMemberOutJSON.put("memberID", sharedPref.getInt(getString(R.string.memberID), 0));
+            new AccountAsyncTask().execute(url.toString());
         } catch (JSONException e){
             Toast.makeText(this,"Error with JSON creation on login: " +
                             e.getMessage(),
@@ -63,7 +80,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private class LoginAsyncTask extends AsyncTask<String, Void, String> {
+    /**
+     * does all back end data retrieval from the database
+     */
+    private class AccountAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -79,15 +99,15 @@ public class MainActivity extends AppCompatActivity {
                             new OutputStreamWriter(urlConnection.getOutputStream());
 
                     // For Debugging
-                    Log.i(mLogin, mMemberJSON.toString());
-                    wr.write(mMemberJSON.toString());
+                    Log.i(mAccount, mMemberOutJSON.toString());
+                    wr.write(mMemberOutJSON.toString());
                     wr.flush();
                     wr.close();
 
                     InputStream content = urlConnection.getInputStream();
 
                     BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
-                    String s;
+                    String s = "";
                     while ((s = buffer.readLine()) != null) {
                         response += s;
                     }
@@ -111,52 +131,29 @@ public class MainActivity extends AppCompatActivity {
             }
             try {
                 JSONObject jsonObject = new JSONObject(s);
-                if (jsonObject.getBoolean("success")) {
-                    login(jsonObject.getString("username"),
-                            jsonObject.getInt("memberID"));
-
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Member couldn't be added: "
-                                    + jsonObject.getString("error")
-                            , Toast.LENGTH_LONG).show();
-                    Log.e(mLogin, jsonObject.getString("error"));
-                }
+                mMemberInJSON = jsonObject;
+                populateTextViews();
             } catch (JSONException e) {
                 Toast.makeText(getApplicationContext(), "JSON Parsing error on Adding Member"
                                 + e.getMessage()
                         , Toast.LENGTH_LONG).show();
-                Log.e(mLogin, e.getMessage());
+                Log.e(mAccount, e.getMessage());
             }
         }
     }
 
-    /** creates an account */
-    public void createAccount(View view) {
-        Intent intent = new Intent(this, CreateAccountActivity.class);
-        //intent.putExtra(EXTRA_MESSAGE, username);
-        startActivity(intent);
-    }
-
     /**
-     * logs the user in
-     *
-     * adds MemberID, Username, and sets Signed_in to true for the userInfo shared preference.
-     * @param username the username
-     * @param memberID the MemberID
+     * populates the TextViews
+     * @throws JSONException
      */
-    public void login(String username, int memberID){
-
-        SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
-                getSharedPreferences("userInfo", 0);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt(getString(R.string.memberID), memberID);
-        editor.putString(getString(R.string.username), username);
-        editor.putBoolean(getString(R.string.signed_in), true);
-        editor.apply();
-
-        Intent intent = new Intent(this, JobListActivity.class);
-        startActivity(intent);
-        finish();
+    public void populateTextViews() throws JSONException {
+        TextView emailText = findViewById(R.id.email);
+        TextView firstText = findViewById(R.id.first_name);
+        TextView lastText = findViewById(R.id.last_name);
+        TextView usernameText = findViewById(R.id.username);
+        emailText.setText(mMemberInJSON.getString("email"));
+        firstText.setText(mMemberInJSON.getString("firstname"));
+        lastText.setText(mMemberInJSON.getString("lastname"));
+        usernameText.setText(mMemberInJSON.getString("username"));
     }
 }

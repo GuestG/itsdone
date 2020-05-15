@@ -4,4 +4,5 @@
     <string name="add_job">https://backitsdoneend.herokuapp.com/addjob</string>
     <string name="register">https://backitsdoneend.herokuapp.com/register</string>
     <string name="login">https://backitsdoneend.herokuapp.com/login</string>
+    <string name="account">https://backitsdoneend.herokuapp.com/account</string>
 </resources>

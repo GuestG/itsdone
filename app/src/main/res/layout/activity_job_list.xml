@@ -11,8 +11,8 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="0dp"
+        android:theme="@style/AppTheme.NoActionBar" >
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -25,18 +25,18 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="613dp"
+        android:layout_height="fill_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <include
             layout="@layout/job_list"
             android:layout_width="match_parent"
-            android:layout_height="559dp" />
+            android:layout_height="664dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center|bottom"
             android:orientation="horizontal"
             android:background="@color/cardview_shadow_end_color">
 
@@ -69,21 +69,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.2"
-                android:textColor="#000000"
                 android:background="@drawable/round_button"
-                android:text="Profile" />
+                android:onClick="profile"
+                android:text="Profile"
+                android:textColor="#000000" />
 
         </LinearLayout>
 
     </FrameLayout>
-
-    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fab"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="bottom|end"-->
-<!--        android:layout_margin="@dimen/fab_margin"-->
-<!--        app:srcCompat="@android:drawable/ic_dialog_email" />-->
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

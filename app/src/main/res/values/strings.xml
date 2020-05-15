@@ -21,4 +21,9 @@
     <string name="enter_last_name">last name</string>
     <string name="enter_email">email</string>
 
+    <!-- SharedPref keys -->
+    <string name="signed_in">signed in</string>
+    <string name="username">username</string>
+    <string name="memberID">memberID</string>
+
 </resources>

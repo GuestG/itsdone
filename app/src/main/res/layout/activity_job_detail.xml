@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
-    tools:context=".JobDetailActivity"
-    tools:ignore="MergeRootFrame">
+    tools:context=".JobDetailActivity">
+
+    <!-- TODO why is there a button hidden under the massive
+    action bar? and why is ur code dependant on that button?
+    -->
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"
@@ -51,4 +54,4 @@
         app:layout_anchorGravity="top|end"
         app:srcCompat="@android:drawable/stat_notify_chat" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</RelativeLayout>
