@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
 
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +38,7 @@ import java.util.List;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  *
- * @author Trevor Peters
+ * @author Trevor Peters, Max
  * @version 1.1
  * @since 5/15/2020
  */
@@ -55,6 +54,7 @@ public class JobListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Toast.makeText(getApplicationContext(), "starting activity", Toast.LENGTH_SHORT).show(); // debug
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_list);
 
@@ -236,14 +236,10 @@ public class JobListActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         }
+
     }
 
-    /**
-     * brings us to the profile page!!
-     * @param view the view that called the method
-     */
     public void profile(View view){
-
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }

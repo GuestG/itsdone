@@ -7,6 +7,40 @@
     android:background="@drawable/gradient"
     tools:context=".CreateAccountActivity">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/createAcccountButtonCardView"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="55dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
+        app:cardBackgroundColor="@color/gradientbackground2"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.696"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:id="@+id/create_account_button"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@color/clear"
+                android:onClick="createAccount"
+                android:text="@string/create_account"  />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+<!--
     <Button
         android:id="@+id/create_account_button"
         android:layout_width="wrap_content"
@@ -18,7 +52,7 @@
         app:layout_constraintHorizontal_bias="0.696"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password" />
-
+-->
     <EditText
         android:id="@+id/first_name"
         android:layout_width="wrap_content"
