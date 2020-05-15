@@ -23,8 +23,8 @@ import edu.tacoma.uw.itsdone.model.Account;
  * this is an activity that creates an account for the user
  *
  * @authors Trevor Peters, Gehry Guest
- * @version 1.0
- * @since 2020-05-13
+ * @version 1.1
+ * @since 2020-05-15
  */
 public class CreateAccountActivity extends AppCompatActivity {
     private JSONObject mMemberJSON;
