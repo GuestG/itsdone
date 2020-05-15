@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient"
     tools:context=".JobAddFragment">
 
@@ -38,7 +39,6 @@
         android:layout_marginBottom="100dp"
         android:hint="@string/enter_job_price_hint" />
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/addJobCardView"
         android:layout_width="300dp"
@@ -48,16 +48,21 @@
         android:layout_marginLeft="55dp"
         android:layout_marginTop="500dp"
         android:layout_marginRight="56dp"
-        android:background="@color/clear">
+        app:cardBackgroundColor="@color/clear">
 
-
-        <Button
-            android:id="@+id/btn_add_job"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/btn_add_job"
-            android:elevation="5dp"
-            android:background="@drawable/round_button" />
+            android:layout_height="match_parent">
+
+
+            <Button
+                android:id="@+id/btn_add_job"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/btn_add_job"
+                android:elevation="5dp"
+                android:background="@drawable/round_button" />
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
