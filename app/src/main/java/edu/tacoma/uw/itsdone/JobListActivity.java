@@ -69,6 +69,16 @@ public class JobListActivity extends AppCompatActivity {
             }
         });
 
+        Button showSavedJobsBtn = findViewById(R.id.FindJobButton);
+        createJobBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(this, SavedJobsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         if (findViewById(R.id.item_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
