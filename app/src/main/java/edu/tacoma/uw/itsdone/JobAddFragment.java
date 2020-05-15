@@ -18,7 +18,7 @@ public class JobAddFragment extends Fragment {
     private AddListener mAddListener;
 
     public interface AddListener {
-        public void addJob(Job job);
+        void addJob(Job job);
     }
 
     public JobAddFragment() {

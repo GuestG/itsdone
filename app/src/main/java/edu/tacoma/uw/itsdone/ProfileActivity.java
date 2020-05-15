@@ -1,16 +1,15 @@
 package edu.tacoma.uw.itsdone;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,10 +21,20 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * The central hub for all things about the current users profile!!
+ *
+ * @author Trevor Peters
+ * @version 1.0
+ * @since 5/15/2020
+ *
+ */
 public class ProfileActivity extends AppCompatActivity {
     private JSONObject mMemberOutJSON;
     private JSONObject mMemberInJSON;
     private String mAccount = "ACCOUNT";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +42,10 @@ public class ProfileActivity extends AppCompatActivity {
         getAccount();
     }
 
+    /**
+     * logs the user out. sets the userInfo shared preference to default values
+     * @param view
+     */
     public void logout(View view){
         //TODO username & MemberID can accessed here
 
@@ -48,7 +61,9 @@ public class ProfileActivity extends AppCompatActivity {
         finish();
     }
 
-    /** Called when the user taps the GO! button */
+    /**
+     * get the account info from the database
+     */
     public void getAccount() {
         StringBuilder url = new StringBuilder(getString(R.string.account));
         mMemberOutJSON = new JSONObject();
@@ -65,6 +80,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * does all back end data retrieval from the database
+     */
     private class AccountAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
@@ -123,6 +141,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
         }
     }
+
+    /**
+     * populates the TextViews
+     * @throws JSONException
+     */
     public void populateTextViews() throws JSONException {
         TextView emailText = findViewById(R.id.email);
         TextView firstText = findViewById(R.id.first_name);

@@ -1,8 +1,5 @@
 package edu.tacoma.uw.itsdone.model;
 
-
-import org.json.JSONObject;
-
 import java.io.Serializable;
 
 
@@ -22,11 +19,6 @@ public class Account implements Serializable {
     private String mPassword;
 
 
-    public static final String FIRSTNAME = "firstname";
-    public static final String LASTNAME = "lastname";
-    public static final String USERNAME = "username";
-    public static final String EMAIL = "email";
-    public static final String PASSWORD = "password";
 
     /**
      * Constructor for the account class
@@ -56,17 +48,6 @@ public class Account implements Serializable {
     public String getEmail() { return mEmail; }
     /** returns password */
     public String getPassword() { return mPassword; }
-
-    /** sets mFirstName to s */
-    public void setFirstName(String s) { mFirstName = s; }
-    /** sets mLastName to s */
-    public void setLastName(String s) { mLastName = s; }
-    /** sets mUsername to s */
-    public void setUsername(String s) { mUsername = s; }
-    /** sets mEmail to s */
-    public void setEmail(String s) { mEmail = s; }
-    /** sets mPassword to s */
-    public void setPassword(String s) { mPassword = s; }
 
 }
 

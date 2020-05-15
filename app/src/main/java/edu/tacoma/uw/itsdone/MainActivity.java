@@ -2,7 +2,6 @@ package edu.tacoma.uw.itsdone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -22,14 +21,12 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import edu.tacoma.uw.itsdone.model.Account;
 
 public class MainActivity extends AppCompatActivity {
     private JSONObject mMemberJSON;
     public static final String mLogin = "Login";
 
 
-    public static final String EXTRA_MESSAGE = "Not Entirely sure what this is for"; //TODO
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
                 getSharedPreferences("userInfo", 0);
+        //check if the use is already logged in
         if (sharedPref.getBoolean(getString(R.string.signed_in), false)){
             login(sharedPref.getString(getString(R.string.username), null), sharedPref.getInt(getString(R.string.memberID), 0));
         }
@@ -87,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     InputStream content = urlConnection.getInputStream();
 
                     BufferedReader buffer = new BufferedReader(new InputStreamReader(content));
-                    String s = "";
+                    String s;
                     while ((s = buffer.readLine()) != null) {
                         response += s;
                     }
@@ -138,6 +136,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * logs the user in
+     *
+     * adds MemberID, Username, and sets Signed_in to true for the userInfo shared preference.
+     * @param username the username
+     * @param memberID the MemberID
+     */
     public void login(String username, int memberID){
 
         SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
@@ -146,10 +151,9 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt(getString(R.string.memberID), memberID);
         editor.putString(getString(R.string.username), username);
         editor.putBoolean(getString(R.string.signed_in), true);
-        editor.commit();
+        editor.apply();
 
         Intent intent = new Intent(this, JobListActivity.class);
-        //intent.putExtra(EXTRA_MESSAGE, username);
         startActivity(intent);
         finish();
     }
