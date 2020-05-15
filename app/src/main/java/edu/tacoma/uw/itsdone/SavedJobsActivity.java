@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,13 @@ import java.util.List;
 
 import edu.tacoma.uw.itsdone.model.Job;
 
+/**
+ * shows the jobs the user saved.
+ *
+ * @author Trevor Peters, Max
+ * @version 1.0
+ * @since 5/15/2020
+ */
 public class SavedJobsActivity extends AppCompatActivity {
 
     /**
@@ -38,24 +46,27 @@ public class SavedJobsActivity extends AppCompatActivity {
      */
     private boolean mTwoPane;
     private List<Job> mJobList;
+    private JSONObject mMemberOutJSON;
+    private String mSavedJobs = "SAVEDJOBS";
     private RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_job_list);
+        setContentView(R.layout.activity_saved_jobs);
+        SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
+                getSharedPreferences("userInfo", 0);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle(getTitle());
+        mMemberOutJSON = new JSONObject();
+        try{
+            mMemberOutJSON.put("memberID", sharedPref.getInt(getString(R.string.memberID), 0));
+        } catch (JSONException e){
+            Toast.makeText(this,"Error with JSON creation in SavedJobsActivity: " +
+                            e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
 
-        Button createJobBtn = findViewById(R.id.AddJobButton);
-        createJobBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                launchJobAddFragment();
-            }
-        });
+
 
         if (findViewById(R.id.item_detail_container) != null) {
             // The detail container view will be present only in the
@@ -70,18 +81,6 @@ public class SavedJobsActivity extends AppCompatActivity {
         setupRecyclerView((RecyclerView) mRecyclerView);
     }
 
-    private void launchJobAddFragment() {
-        JobAddFragment jobAddFragment = new JobAddFragment();
-        if (mTwoPane){
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.item_detail_container, jobAddFragment)
-                    .commit();
-        } else {
-            Intent intent = new Intent(this, JobDetailActivity.class);
-            intent.putExtra(JobDetailActivity.ADD_JOB, true);
-            startActivity(intent);
-        }
-    }
 
 
     @Override
@@ -103,7 +102,7 @@ public class SavedJobsActivity extends AppCompatActivity {
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SavedJobsActivity.SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final JobListActivity mParentActivity;
+        private final SavedJobsActivity mParentActivity;
         private final List<Job> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener(){
@@ -128,7 +127,7 @@ public class SavedJobsActivity extends AppCompatActivity {
             }
         };
 
-        SimpleItemRecyclerViewAdapter(JobListActivity parent,
+        SimpleItemRecyclerViewAdapter(SavedJobsActivity parent,
                                       List<Job> items,
                                       boolean twoPane) {
             mValues = items;
@@ -178,6 +177,17 @@ public class SavedJobsActivity extends AppCompatActivity {
                 try {
                     URL urlObject = new URL(url);
                     urlConnection = (HttpURLConnection) urlObject.openConnection();
+                    urlConnection.setRequestMethod("POST");
+                    urlConnection.setRequestProperty("Content-Type", "application/json");
+                    urlConnection.setDoOutput(true);
+                    OutputStreamWriter wr =
+                            new OutputStreamWriter(urlConnection.getOutputStream());
+
+                    // For Debugging
+                    Log.i(mSavedJobs, mMemberOutJSON.toString());
+                    wr.write(mMemberOutJSON.toString());
+                    wr.flush();
+                    wr.close();
 
                     InputStream content = urlConnection.getInputStream();
 
@@ -224,11 +234,6 @@ public class SavedJobsActivity extends AppCompatActivity {
             }
         }
 
-    }
-
-    public void profile(View view){
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
     }
 
 }
