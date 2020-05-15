@@ -2,63 +2,64 @@ package edu.tacoma.uw.itsdone;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import edu.tacoma.uw.itsdone.model.Account;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * this is an activity that creates an account for the user
+ *
+ * @author Trevor Peters
+ * @version 1.0
+ * @since 2020-05-13
+ */
+public class CreateAccountActivity extends AppCompatActivity {
     private JSONObject mMemberJSON;
-    public static final String mLogin = "Login";
-
-
-    public static final String EXTRA_MESSAGE = "Not Entirely sure what this is for"; //TODO
+    public static final String ADD_MEMBER = "ADD_MEMBER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_create_account);
     }
 
+    /**
+     * adds the member to the database
+     *
+     * @param account account to be added
+     */
+    public void addMember(Account account) {
+        StringBuilder url = new StringBuilder(getString(R.string.register));
 
-    /** Called when the user taps the GO! button */
-    public void loginCheck(View view) {
-        StringBuilder url = new StringBuilder(getString(R.string.login));
-        String password = ((EditText) findViewById(R.id.editText)).getText().toString();
-        String username = ((EditText) findViewById(R.id.editText2)).getText().toString();
         mMemberJSON = new JSONObject();
         try{
-            mMemberJSON.put("username", username);
-            mMemberJSON.put("password", password);
-            new LoginAsyncTask().execute(url.toString());
+            mMemberJSON.put("first", account.getFirstName());
+            mMemberJSON.put("last", account.getLastName());
+            mMemberJSON.put("username", account.getUsername());
+            mMemberJSON.put("email", account.getEmail());
+            mMemberJSON.put("password", account.getPassword());
+            new AddMemberAsyncTask().execute(url.toString());
 
         } catch (JSONException e){
-            Toast.makeText(this,"Error with JSON creation on login: " +
+            Toast.makeText(this,"Error with JSON creation on creating an account: " +
                             e.getMessage(),
                     Toast.LENGTH_LONG).show();
         }
-
     }
 
-    private class LoginAsyncTask extends AsyncTask<String, Void, String> {
+    private class AddMemberAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
             String response = "";
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                             new OutputStreamWriter(urlConnection.getOutputStream());
 
                     // For Debugging
-                    Log.i(mLogin, mMemberJSON.toString());
+                    Log.i(ADD_MEMBER, mMemberJSON.toString());
                     wr.write(mMemberJSON.toString());
                     wr.flush();
                     wr.close();
@@ -107,45 +108,40 @@ public class MainActivity extends AppCompatActivity {
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getBoolean("success")) {
-                    login(jsonObject.getString("username"),
-                            jsonObject.getInt("memberID"));
-
+                    Toast.makeText(getApplicationContext(), "Member Added successfully"
+                            , Toast.LENGTH_SHORT).show();
+                    finish();
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Member couldn't be added: "
                                     + jsonObject.getString("error")
                             , Toast.LENGTH_LONG).show();
-                    Log.e(mLogin, jsonObject.getString("error"));
+                    Log.e(ADD_MEMBER, jsonObject.getString("error"));
                 }
             } catch (JSONException e) {
                 Toast.makeText(getApplicationContext(), "JSON Parsing error on Adding Member"
                                 + e.getMessage()
                         , Toast.LENGTH_LONG).show();
-                Log.e(mLogin, e.getMessage());
+                Log.e(ADD_MEMBER, e.getMessage());
             }
         }
     }
 
-    /** creates an account */
+
+    /**
+     * creates the account and passes it to the AddMember method.
+     *
+     * @param view
+     */
     public void createAccount(View view) {
-        Intent intent = new Intent(this, CreateAccountActivity.class);
-        //intent.putExtra(EXTRA_MESSAGE, username);
-        startActivity(intent);
-    }
+        String password = ((EditText) findViewById(R.id.password)).getText().toString();
+        String username = ((EditText) findViewById(R.id.username)).getText().toString();
+        String firstname = ((EditText) findViewById(R.id.first_name)).getText().toString();
+        String lastname = ((EditText) findViewById(R.id.last_name)).getText().toString();
+        String email = ((EditText) findViewById(R.id.email)).getText().toString();
 
-    public void login(String username, int memberID){
-        //TODO username & MemberID can accessed here
+        Account account = new Account(firstname,lastname, username, email, password);
+        addMember(account);
 
-        SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
-                getSharedPreferences("userInfo", 0);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putInt("memberID", memberID);
-        editor.putString("username", username);
-        editor.commit();
-
-        Intent intent = new Intent(this, JobListActivity.class);
-        //intent.putExtra(EXTRA_MESSAGE, username);
-        startActivity(intent);
-        finish();
     }
 }

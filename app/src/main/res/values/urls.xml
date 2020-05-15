@@ -2,4 +2,6 @@
 <resources>
     <string name="get_jobs">https://backitsdoneend.herokuapp.com/jobs</string>
     <string name="add_job">https://backitsdoneend.herokuapp.com/addjob</string>
+    <string name="register">https://backitsdoneend.herokuapp.com/register</string>
+    <string name="login">https://backitsdoneend.herokuapp.com/login</string>
 </resources>

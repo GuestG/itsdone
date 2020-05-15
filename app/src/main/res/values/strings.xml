@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">itsdone</string>
     <string name="title_detail">Item Detail</string>
-    <string name="enter_username">username</string>
-    <string name="enter_password">password</string>
-    <string name="create_account">Create New Account!</string>
-    <string name="button_login">Go!</string>
+    <string name="create_account">Create Account</string>
+    <string name="button_login">Login</string>
     <string name="button_logout">Logout</string>
 
     <!-- Add Course Fragment hints -->
@@ -15,4 +13,12 @@
     <string name="enter_job_price_hint">Enter Job Price</string>
 
     <string name="btn_add_job">Add Job</string>
+
+    <!-- Create Account hints -->
+    <string name="enter_username">username</string>
+    <string name="enter_password">password</string>
+    <string name="enter_first_name">first name</string>
+    <string name="enter_last_name">last name</string>
+    <string name="enter_email">email</string>
+
 </resources>
