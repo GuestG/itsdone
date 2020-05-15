@@ -49,13 +49,6 @@ public class JobDetailFragment extends Fragment {
             // to load content from a content provider.
             mJob = (Job) getArguments().getSerializable(ARG_ITEM_ID);
 
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout)
-                    activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mJob.getTitle());
-
-            }
         }
     }
 
