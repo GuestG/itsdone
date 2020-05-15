@@ -21,7 +21,9 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
+/**
+ * launcher activity. this is also the login menu
+ */
 public class MainActivity extends AppCompatActivity {
     private JSONObject mMemberJSON;
     public static final String mLogin = "Login";

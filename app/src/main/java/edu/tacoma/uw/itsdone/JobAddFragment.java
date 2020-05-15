@@ -12,7 +12,13 @@ import android.widget.EditText;
 
 import edu.tacoma.uw.itsdone.model.Job;
 
-
+/**
+ * a fragment for adding jobs
+ *
+ * @author max
+ * @verson 1.1
+ * @since 5/8/2020
+ */
 public class JobAddFragment extends Fragment {
 
     private AddListener mAddListener;
