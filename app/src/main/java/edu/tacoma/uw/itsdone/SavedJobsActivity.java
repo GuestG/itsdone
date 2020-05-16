@@ -103,7 +103,7 @@ public class SavedJobsActivity extends AppCompatActivity {
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SavedJobsActivity.SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final JobListActivity mParentActivity;
+        private final SavedJobsActivity mParentActivity;
         private final List<Job> mValues;
         private final boolean mTwoPane;
         private final View.OnClickListener mOnClickListener = new View.OnClickListener(){
@@ -128,7 +128,7 @@ public class SavedJobsActivity extends AppCompatActivity {
             }
         };
 
-        SimpleItemRecyclerViewAdapter(JobListActivity parent,
+        SimpleItemRecyclerViewAdapter(SavedJobsActivity parent,
                                       List<Job> items,
                                       boolean twoPane) {
             mValues = items;

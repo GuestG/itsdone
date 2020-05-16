@@ -70,11 +70,10 @@ public class JobListActivity extends AppCompatActivity {
         });
 
         Button showSavedJobsBtn = findViewById(R.id.FindJobButton);
-        createJobBtn.setOnClickListener(new View.OnClickListener() {
+        showSavedJobsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(this, SavedJobsActivity.class);
-                startActivity(intent);
+                launchSavedJobsActivity();
             }
         });
 
@@ -90,6 +89,11 @@ public class JobListActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.item_list);
         assert mRecyclerView != null;
         setupRecyclerView((RecyclerView) mRecyclerView);
+    }
+
+    private void launchSavedJobsActivity(){
+        Intent intent = new Intent(this, SavedJobsActivity.class);
+        startActivity(intent);
     }
 
     private void launchJobAddFragment() {
