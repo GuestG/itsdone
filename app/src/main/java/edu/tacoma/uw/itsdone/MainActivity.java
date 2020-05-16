@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
                 getSharedPreferences("userInfo", 0);
         //check if the use is already logged in
-        if (sharedPref.getBoolean(getString(R.string.signed_in), false)){
+        if (sharedPref.getBoolean(getString(R.string.signed_in), false)) {
             login(sharedPref.getString(getString(R.string.username), null), sharedPref.getInt(getString(R.string.memberID), 0));
         }
     }
