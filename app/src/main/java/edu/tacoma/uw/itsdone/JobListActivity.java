@@ -73,7 +73,7 @@ public class JobListActivity extends AppCompatActivity {
         showSavedJobsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                launchSavedJobsActivity();
+                launchSavedJobActivity();
             }
         });
 
@@ -91,7 +91,7 @@ public class JobListActivity extends AppCompatActivity {
         setupRecyclerView((RecyclerView) mRecyclerView);
     }
 
-    private void launchSavedJobsActivity(){
+    private void launchSavedJobActivity() {
         Intent intent = new Intent(this, SavedJobsActivity.class);
         startActivity(intent);
     }
