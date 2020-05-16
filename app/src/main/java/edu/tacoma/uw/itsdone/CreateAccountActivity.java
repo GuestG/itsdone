@@ -70,6 +70,9 @@ public class CreateAccountActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * connects to the DB and adds the member to the DB
+     */
     private class AddMemberAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
@@ -142,7 +145,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     /**
      * creates the account and passes it to the AddMember method.
      *
-     * @param view
+     * @param view the view that called the method
      */
     public void createAccount(View view) {
         String password = ((EditText) findViewById(R.id.password)).getText().toString();

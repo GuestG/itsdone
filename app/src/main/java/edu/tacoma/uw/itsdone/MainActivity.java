@@ -30,7 +30,10 @@ public class MainActivity extends AppCompatActivity {
     public static final String mLogin = "Login";
 
 
-
+    /**
+     * call super.onCreate and also checks if the user was already logged in.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -39,13 +42,13 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
                 getSharedPreferences("userInfo", 0);
         //check if the use is already logged in
-        if (sharedPref.getBoolean(getString(R.string.signed_in), false)){
+        if (sharedPref.getBoolean(getString(R.string.signed_in), false)) {
             login(sharedPref.getString(getString(R.string.username), null), sharedPref.getInt(getString(R.string.memberID), 0));
         }
     }
 
 
-    /** Called when the user taps the GO! button */
+    /** Called when the user taps the login! button */
     public void loginCheck(View view) {
         StringBuilder url = new StringBuilder(getString(R.string.login));
         String password = ((EditText) findViewById(R.id.editText)).getText().toString();
@@ -64,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * contacts the database to see if the username and password match
+     */
     private class LoginAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
