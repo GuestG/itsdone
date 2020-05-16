@@ -15,15 +15,17 @@
         android:layout_marginLeft="100dp"
         android:layout_marginTop="280dp"
         android:text="@string/enter_first_name"
+        android:textSize="24sp"
         app:layout_constraintHorizontal_bias="0.101" />
 
     <TextView
         android:id="@+id/last_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="220dp"
         android:layout_marginTop="280dp"
         android:text="@string/enter_last_name"
-        android:layout_marginLeft="180dp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,9 +35,10 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
         android:layout_marginTop="340dp"
         android:text="@string/enter_username"
-        android:layout_marginLeft="100dp"
+        android:textSize="24sp"
         app:layout_constraintHorizontal_bias="0.439"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/last_name" />
@@ -44,9 +47,10 @@
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
         android:layout_marginTop="400dp"
         android:text="@string/enter_email"
-        android:layout_marginLeft="100dp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username" />
