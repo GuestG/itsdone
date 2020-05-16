@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
@@ -52,6 +51,11 @@ public class JobListActivity extends AppCompatActivity {
     private List<Job> mJobList;
     private RecyclerView mRecyclerView;
 
+    /**
+     * calls super.onCreate and also sets up the createJob and SaveJob buttons
+     * also sets up the Recycler view
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,11 +95,17 @@ public class JobListActivity extends AppCompatActivity {
         setupRecyclerView((RecyclerView) mRecyclerView);
     }
 
+    /**
+     * launches the saved jobs activity
+     */
     private void launchSavedJobActivity() {
         Intent intent = new Intent(this, SavedJobsActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * launchs the JobAdd Fragment
+     */
     private void launchJobAddFragment() {
         JobAddFragment jobAddFragment = new JobAddFragment();
         if (mTwoPane){
@@ -109,7 +119,9 @@ public class JobListActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * calls super.onResume and also repopulates the JobList
+     */
     @Override
     protected void onResume(){
         super.onResume();
@@ -118,6 +130,10 @@ public class JobListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * sets up the recyclerView
+     * @param recyclerView
+     */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         if (mJobList != null) {
             recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(
@@ -126,6 +142,9 @@ public class JobListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * an inner class for the Recycler view Adapter
+     */
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
@@ -195,6 +214,9 @@ public class JobListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * connects to the Database and gets all the jobs
+     */
     private class JobTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
@@ -252,6 +274,10 @@ public class JobListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * launches the profile activity
+     * @param view the view that called the method
+     */
     public void profile(View view){
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);

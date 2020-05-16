@@ -2,7 +2,6 @@ package edu.tacoma.uw.itsdone;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
@@ -14,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +48,10 @@ public class SavedJobsActivity extends AppCompatActivity {
     private String mSavedJobs = "SAVEDJOBS";
     private RecyclerView mRecyclerView;
 
+    /**
+     * calls the super.onCreate, also initializes the mMemberOurJSON and  mRecyclerView
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +84,9 @@ public class SavedJobsActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * calls super.onResume and also repopulates the list
+     */
     @Override
     protected void onResume(){
         super.onResume();
@@ -91,6 +95,10 @@ public class SavedJobsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * setes up the recyclerView
+     * @param recyclerView
+     */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         if (mJobList != null) {
             recyclerView.setAdapter(new SavedJobsActivity.SimpleItemRecyclerViewAdapter(
@@ -99,6 +107,9 @@ public class SavedJobsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * class for the Recycler View Adapter
+     */
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SavedJobsActivity.SimpleItemRecyclerViewAdapter.ViewHolder> {
 
@@ -168,6 +179,9 @@ public class SavedJobsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * anAsyncTask for getting the SavedJobs
+     */
     private class JobTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {

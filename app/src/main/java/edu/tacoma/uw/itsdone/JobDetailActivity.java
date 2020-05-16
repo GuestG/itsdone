@@ -4,18 +4,15 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
 
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -46,16 +43,16 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
     public static final String ADD_JOB = "ADD_JOB";
     private JSONObject mJobJSON;
 
+    /**
+     * calls super.OnCreate and also sets up our action bar
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-
-
-
-
 
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
@@ -92,6 +89,11 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             }
         }
     }
+
+    /**
+     * starts the process for a user to save a job they are interested in
+     * @param job the job they want to save
+     */
     @Override
     public void saveJob(Job job){
         StringBuilder url = new StringBuilder(getString(R.string.save_job));
@@ -111,6 +113,10 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         }
     }
 
+    /**
+     * starts the process for the user to add a job into the DB
+     * @param job the job they created
+     */
     @Override
     public void addJob(Job job) {
         StringBuilder url = new StringBuilder(getString(R.string.add_job));
@@ -134,6 +140,9 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         }
     }
 
+    /**
+     * an async task for connecting to the DB.
+     */
     private class AddJobAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {

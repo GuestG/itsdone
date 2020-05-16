@@ -81,7 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     /**
-     * does all back end data retrieval from the database
+     * gets the First and last names, email, and username from the database
      */
     private class AccountAsyncTask extends AsyncTask<String, Void, String> {
         @Override

@@ -1,9 +1,7 @@
 package edu.tacoma.uw.itsdone;
 
-import android.app.Activity;
 import android.os.Bundle;
 
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 
 import androidx.fragment.app.Fragment;
 
@@ -48,6 +46,10 @@ public class JobDetailFragment extends Fragment {
     public JobDetailFragment() {
     }
 
+    /**
+     * creates the view and also gets the job we want to look at
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -60,17 +62,16 @@ public class JobDetailFragment extends Fragment {
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
             mJob = (Job) getArguments().getSerializable(ARG_ITEM_ID);
-
-//            Button saveJobBtn = findViewById(R.id.SaveJobButton);
-//            saveJobBtn.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    mSaveListener.saveJob(mJob);
-//                }
-//            });
         }
     }
 
+    /**
+     * creates the view and sets the text of all the text fields in the view
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return the view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

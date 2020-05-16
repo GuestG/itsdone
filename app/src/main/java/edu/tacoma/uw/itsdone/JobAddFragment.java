@@ -12,7 +12,11 @@ import android.widget.EditText;
 
 import edu.tacoma.uw.itsdone.model.Job;
 
-
+/**
+ * a fragment for adding jobs
+ * @author max malyshev
+ * @since 5/10/2020
+ */
 public class JobAddFragment extends Fragment {
 
     private AddListener mAddListener;
@@ -31,7 +35,13 @@ public class JobAddFragment extends Fragment {
         mAddListener = (AddListener) getActivity();
     }
 
-
+    /**
+     * creates the view and also sets up the on click for the add button
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return returns the view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
