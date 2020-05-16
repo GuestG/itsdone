@@ -23,6 +23,10 @@ import java.net.URL;
 
 /**
  * launcher activity. this is also the login menu
+ *
+ * @author Trevor Peters
+ * @version 1.0
+ * @since 5/12
  */
 public class MainActivity extends AppCompatActivity {
     private JSONObject mMemberJSON;

@@ -94,7 +94,6 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
     }
     @Override
     public void saveJob(Job job){
-        Toast.makeText(this,"Saving Job", Toast.LENGTH_LONG).show();
         StringBuilder url = new StringBuilder(getString(R.string.save_job));
 
         mJobJSON = new JSONObject();
@@ -184,7 +183,7 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getBoolean("success")) {
-                    Toast.makeText(getApplicationContext(), "Job Added successfully"
+                    Toast.makeText(getApplicationContext(), "successful"
                             , Toast.LENGTH_SHORT).show();
                 }
                 else {
