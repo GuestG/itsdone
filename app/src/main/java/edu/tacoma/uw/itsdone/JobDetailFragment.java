@@ -1,25 +1,19 @@
 package edu.tacoma.uw.itsdone;
 
-import android.app.Activity;
 import android.os.Bundle;
-
-import com.google.android.material.appbar.CollapsingToolbarLayout;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
 import edu.tacoma.uw.itsdone.model.Job;
 
 /**
  * This fragment displays all info on the job, through the use of loading
  * data from the database.
  *
- * @authors Gehry Guest
+ * @authors Gehry Guest, Max Malyshev
  * @version 1.1
  * @since 2020-05-15
  */
@@ -31,7 +25,7 @@ public class JobDetailFragment extends Fragment {
     public static final String ARG_ITEM_ID = "item_id";
 
     /**
-     * The dummy content this fragment is presenting.
+     * The job this fragment is representing
      */
     private Job mJob;
 
@@ -48,6 +42,10 @@ public class JobDetailFragment extends Fragment {
     public JobDetailFragment() {
     }
 
+    /**
+     * Initializes the fragment.
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -61,16 +59,16 @@ public class JobDetailFragment extends Fragment {
             // to load content from a content provider.
             mJob = (Job) getArguments().getSerializable(ARG_ITEM_ID);
 
-//            Button saveJobBtn = findViewById(R.id.SaveJobButton);
-//            saveJobBtn.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    mSaveListener.saveJob(mJob);
-//                }
-//            });
         }
     }
 
+    /**
+     * creates and initializes the fields in the view.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -90,6 +88,9 @@ public class JobDetailFragment extends Fragment {
 
 
         Button saveButton = rootView.findViewById(R.id.save_job_button);
+        /**
+         * adds a save job listener to the save job button
+         */
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

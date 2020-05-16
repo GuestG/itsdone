@@ -3,31 +3,20 @@ package edu.tacoma.uw.itsdone;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import androidx.appcompat.widget.Toolbar;
-
 import android.util.Log;
-import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.ActionBar;
-
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
 import edu.tacoma.uw.itsdone.model.Job;
 
 /**
@@ -36,7 +25,7 @@ import edu.tacoma.uw.itsdone.model.Job;
  * item details are presented side-by-side with a list of items
  * in a {@link JobListActivity}.
  *
- * @author Trevor Peters
+ * @author Trevor Peters, Max Malsyev
  * @version 1.1
  * @since 5/15/2020
  */
@@ -46,6 +35,10 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
     public static final String ADD_JOB = "ADD_JOB";
     private JSONObject mJobJSON;
 
+    /**
+     * initializes the activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,25 +46,12 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
 
-
-
-
-
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // savedInstanceState is non-null when there is fragment state
-        // saved from previous configurations of this activity
-        // (e.g. when rotating the screen from portrait to landscape).
-        // In this case, the fragment will automatically be re-added
-        // to its container so we don't need to manually add it.
-        // For more information, see the Fragments API guide at:
-        //
-        // http://developer.android.com/guide/components/fragments.html
-        //
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
@@ -92,6 +72,13 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             }
         }
     }
+
+    /**
+     * method for saving a job to the users saved jobs.
+     * these are the jobs that the user accepts and is
+     * willing to complete.
+     * @param job the job to accept.
+     */
     @Override
     public void saveJob(Job job){
         StringBuilder url = new StringBuilder(getString(R.string.save_job));
@@ -111,6 +98,13 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         }
     }
 
+    /**
+     * method for allowing the user to create a new job.
+     * This job gets put to the general job database and will
+     * be visible to all other users. Anyone who is willing
+     * can accept this job.
+     * @param job The job to create.
+     */
     @Override
     public void addJob(Job job) {
         StringBuilder url = new StringBuilder(getString(R.string.add_job));
@@ -134,6 +128,9 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         }
     }
 
+    /**
+     * Private sub class for getting json files from the database.
+     */
     private class AddJobAsyncTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
@@ -174,6 +171,10 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             return response;
         }
 
+        /**
+         * Helper method for getting json files from database.
+         * @param s
+         */
         @Override
         protected void onPostExecute(String s) {
             if (s.startsWith("Unable to add the new Job")) {
@@ -201,16 +202,16 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         }
     }
 
+    /**
+     * Weather or not the item is selected
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
+
             navigateUpTo(new Intent(this, JobListActivity.class));
             return true;
         }

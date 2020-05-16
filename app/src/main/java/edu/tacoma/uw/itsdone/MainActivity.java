@@ -1,7 +1,6 @@
 package edu.tacoma.uw.itsdone;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -10,10 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -24,7 +21,7 @@ import java.net.URL;
 /**
  * launcher activity. this is also the login menu
  *
- * @author Trevor Peters
+ * @author Trevor Peters, Max Malyshev
  * @version 1.0
  * @since 5/12
  */

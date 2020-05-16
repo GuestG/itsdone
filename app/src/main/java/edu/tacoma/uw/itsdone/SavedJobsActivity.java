@@ -2,9 +2,7 @@ package edu.tacoma.uw.itsdone;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,13 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -28,13 +23,12 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
-
 import edu.tacoma.uw.itsdone.model.Job;
 
 /**
- * shows the jobs the user saved.
+ * shows all of the jobs the user saved.
  *
- * @author Trevor Peters, Max
+ * @author Trevor Peters, Max Malyshev
  * @version 1.0
  * @since 5/15/2020
  */
@@ -50,6 +44,10 @@ public class SavedJobsActivity extends AppCompatActivity {
     private String mSavedJobs = "SAVEDJOBS";
     private RecyclerView mRecyclerView;
 
+    /**
+     * Initializes the activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,8 +64,6 @@ public class SavedJobsActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
         }
 
-
-
         if (findViewById(R.id.item_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
@@ -81,8 +77,9 @@ public class SavedJobsActivity extends AppCompatActivity {
         setupRecyclerView((RecyclerView) mRecyclerView);
     }
 
-
-
+    /**
+     * resumes the activity. Calls the execute method of the private job tasks class.
+     */
     @Override
     protected void onResume(){
         super.onResume();
@@ -91,6 +88,10 @@ public class SavedJobsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * sets up the recycler view.
+     * @param recyclerView the recycler view to setup.
+     */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         if (mJobList != null) {
             recyclerView.setAdapter(new SavedJobsActivity.SimpleItemRecyclerViewAdapter(
@@ -99,12 +100,19 @@ public class SavedJobsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * A sub class for storing the recycler view data.
+     */
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SavedJobsActivity.SimpleItemRecyclerViewAdapter.ViewHolder> {
 
         private final SavedJobsActivity mParentActivity;
         private final List<Job> mValues;
         private final boolean mTwoPane;
+
+        /**
+         * Sets the action for when a user clicks a job
+         */
         private final View.OnClickListener mOnClickListener = new View.OnClickListener(){
             @Override
             public void onClick(View view){
@@ -127,6 +135,12 @@ public class SavedJobsActivity extends AppCompatActivity {
             }
         };
 
+        /**
+         * Creates  a view adapter item
+         * @param parent
+         * @param items
+         * @param twoPane
+         */
         SimpleItemRecyclerViewAdapter(SavedJobsActivity parent,
                                       List<Job> items,
                                       boolean twoPane) {
@@ -135,6 +149,12 @@ public class SavedJobsActivity extends AppCompatActivity {
             mTwoPane = twoPane;
         }
 
+        /**
+         * Returns a view older object after it is created.
+         * @param parent
+         * @param viewType
+         * @return
+         */
         @Override
         public SavedJobsActivity.SimpleItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
@@ -142,6 +162,11 @@ public class SavedJobsActivity extends AppCompatActivity {
             return new SavedJobsActivity.SimpleItemRecyclerViewAdapter.ViewHolder(view);
         }
 
+        /**
+         * Initializes and binds view and view holder
+         * @param holder
+         * @param position
+         */
         @Override
         public void onBindViewHolder(final SavedJobsActivity.SimpleItemRecyclerViewAdapter.ViewHolder holder, int position) {
             holder.mIdView.setText(mValues.get(position).getJobId());
@@ -151,11 +176,18 @@ public class SavedJobsActivity extends AppCompatActivity {
             holder.itemView.setOnClickListener(mOnClickListener);
         }
 
+        /**
+         * gets the number of jobs in the activity
+         * @return the number of jobs in the activity
+         */
         @Override
         public int getItemCount() {
             return mValues.size();
         }
 
+        /**
+         * subclass for storing the view objects
+         */
         class ViewHolder extends RecyclerView.ViewHolder {
             final TextView mIdView;
             final TextView mContentView;
@@ -168,6 +200,9 @@ public class SavedJobsActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Private sub class used for getting jobs from the database
+     */
     private class JobTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
@@ -207,9 +242,12 @@ public class SavedJobsActivity extends AppCompatActivity {
                 }
             }
             return response;
-
         }
 
+        /**
+         * Helper method for finishing the JSON parsing of jobs.
+         * @param s
+         */
         @Override
         protected void onPostExecute(String s) {
             if (s.startsWith("Unable to")) {

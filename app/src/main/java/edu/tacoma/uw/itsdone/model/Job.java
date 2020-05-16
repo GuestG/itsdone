@@ -10,6 +10,9 @@ import java.util.List;
 /**
  * Class representing a job. Users can create and accept jobs.
  * Job has fields such as title, price, location, and others.
+ * @author Max Malyshev
+ * @version 1.0
+ * @since 2020-05-13
  */
 public class Job implements Serializable {
 

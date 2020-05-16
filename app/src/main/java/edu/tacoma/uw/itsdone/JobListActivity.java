@@ -4,25 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import edu.tacoma.uw.itsdone.model.Job;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -38,7 +32,7 @@ import java.util.List;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  *
- * @author Trevor Peters, Max
+ * @author Trevor Peters, Max Malyshev
  * @version 1.1
  * @since 5/15/2020
  */
@@ -52,6 +46,11 @@ public class JobListActivity extends AppCompatActivity {
     private List<Job> mJobList;
     private RecyclerView mRecyclerView;
 
+    /**
+     * initializes and creates the activity.
+     * Overrides the AppCompatActivity on create method
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,11 +90,17 @@ public class JobListActivity extends AppCompatActivity {
         setupRecyclerView((RecyclerView) mRecyclerView);
     }
 
+    /**
+     * launches and displays the showJob activity.
+     */
     private void launchSavedJobActivity() {
         Intent intent = new Intent(this, SavedJobsActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * Launches and displays the jobAdd activity.
+     */
     private void launchJobAddFragment() {
         JobAddFragment jobAddFragment = new JobAddFragment();
         if (mTwoPane){
@@ -109,7 +114,9 @@ public class JobListActivity extends AppCompatActivity {
         }
     }
 
-
+    /**
+     * resumes the activity. Calls the execute method of the private job tasks class.
+     */
     @Override
     protected void onResume(){
         super.onResume();
@@ -118,6 +125,10 @@ public class JobListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * sets up the recycler view.
+     * @param recyclerView the recycler view to setup.
+     */
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         if (mJobList != null) {
             recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(
@@ -126,6 +137,9 @@ public class JobListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * A sub class for storing the recycler view data.
+     */
     public static class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
@@ -154,6 +168,12 @@ public class JobListActivity extends AppCompatActivity {
             }
         };
 
+        /**
+         * Creates  a view adapter item
+         * @param parent
+         * @param items
+         * @param twoPane
+         */
         SimpleItemRecyclerViewAdapter(JobListActivity parent,
                                       List<Job> items,
                                       boolean twoPane) {
@@ -162,6 +182,12 @@ public class JobListActivity extends AppCompatActivity {
             mTwoPane = twoPane;
         }
 
+        /**
+         * Returns a view older object after it is created.
+         * @param parent
+         * @param viewType
+         * @return
+         */
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
@@ -169,6 +195,11 @@ public class JobListActivity extends AppCompatActivity {
             return new ViewHolder(view);
         }
 
+        /**
+         * Initializes and binds view and view holder
+         * @param holder
+         * @param position
+         */
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mIdView.setText(mValues.get(position).getJobId());
@@ -178,11 +209,18 @@ public class JobListActivity extends AppCompatActivity {
             holder.itemView.setOnClickListener(mOnClickListener);
         }
 
+        /**
+         * gets the number of jobs in the activity
+         * @return the number of jobs in the activity
+         */
         @Override
         public int getItemCount() {
             return mValues.size();
         }
 
+        /**
+         * subclass for storing the view objects
+         */
         class ViewHolder extends RecyclerView.ViewHolder {
             final TextView mIdView;
             final TextView mContentView;
@@ -195,6 +233,9 @@ public class JobListActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Private sub class used for getting jobs from the database
+     */
     private class JobTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... urls) {
@@ -226,6 +267,10 @@ public class JobListActivity extends AppCompatActivity {
 
         }
 
+        /**
+         * Helper method for finishing the JSON parsing of jobs.
+         * @param s
+         */
         @Override
         protected void onPostExecute(String s) {
             if (s.startsWith("Unable to")) {

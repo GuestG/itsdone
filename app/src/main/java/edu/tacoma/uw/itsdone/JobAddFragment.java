@@ -1,37 +1,53 @@
 package edu.tacoma.uw.itsdone;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
 import edu.tacoma.uw.itsdone.model.Job;
 
-
+/**
+ * Class for controlling the job add activity
+ * @author Max Malyshev
+ * @version 1.0
+ * @since 2020-05-13
+ */
 public class JobAddFragment extends Fragment {
 
     private AddListener mAddListener;
 
+    /**
+     * interface for connecting the add job button to the add job fragment
+     */
     public interface AddListener {
         public void addJob(Job job);
     }
 
-    public JobAddFragment() {
-        // Required empty public constructor
-    }
+    /**
+     * Required empty public constructor.
+     */
+    public JobAddFragment() {}
 
+    /**
+     * Creates the Activity instance.
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAddListener = (AddListener) getActivity();
     }
 
-
+    /**
+     * Adds jobs to the list display, and adds a button listener to the add job button.
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return the view of the activity
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
