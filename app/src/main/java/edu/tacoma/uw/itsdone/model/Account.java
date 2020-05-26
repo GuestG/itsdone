@@ -83,6 +83,12 @@ public class Account implements Serializable {
             throw new IllegalArgumentException("Password must contain at least one number and special");
     }
 
+    /**
+     * takes an email and throws an exception if it's invalid
+     * 
+     * @param email the email given
+     * @throws IllegalArgumentException
+     */
     public static void emailValidation (String email) throws IllegalArgumentException {
         if (email == null ||  !EMAIL_PATTERN.matcher(email).matches())
             throw new IllegalArgumentException("please enter a valid email");
