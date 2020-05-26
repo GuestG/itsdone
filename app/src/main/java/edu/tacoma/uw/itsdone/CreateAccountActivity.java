@@ -151,9 +151,14 @@ public class CreateAccountActivity extends AppCompatActivity {
         String firstname = ((EditText) findViewById(R.id.first_name)).getText().toString();
         String lastname = ((EditText) findViewById(R.id.last_name)).getText().toString();
         String email = ((EditText) findViewById(R.id.email)).getText().toString();
-
-        Account account = new Account(firstname,lastname, username, email, password);
-        addMember(account);
-
+        try {
+            Account.emailValidation(email);
+            Account.passwordValidation(password);
+            Account account = new Account(firstname, lastname, username, email, password);
+            addMember(account);
+        } catch (IllegalArgumentException e){
+            Toast.makeText(this, e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package edu.tacoma.uw.itsdone.model;
 
 import java.io.Serializable;
+import java.util.regex.Pattern;
 
 
 /**
@@ -11,6 +12,19 @@ import java.io.Serializable;
  * @since 2020-05-13
  */
 public class Account implements Serializable {
+    public static int MIN_PASSWORD_LENGTH = 6;
+    /**
+     * Email validation pattern.
+     */
+    public static final Pattern EMAIL_PATTERN = Pattern.compile(
+            "[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" +
+                    "\\@" +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+                    "(" +
+                    "\\." +
+                    "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+                    ")+"
+    );
 
     private String mFirstName;
     private String mLastName;
@@ -48,6 +62,31 @@ public class Account implements Serializable {
     public String getEmail() { return mEmail; }
     /** returns password */
     public String getPassword() { return mPassword; }
+
+    /**
+     * throw an exception for passwords that don't meet requirement
+     *
+     * @param pswd the password given
+     * @throws IllegalArgumentException
+     */
+    public static void passwordValidation(String pswd) throws IllegalArgumentException {
+        boolean foundDigit = false, foundSymbol = false;
+        if  (pswd == null || pswd.length() < MIN_PASSWORD_LENGTH)
+            throw new IllegalArgumentException("Password be " + MIN_PASSWORD_LENGTH + " or more characters long");
+        for (int i=0; i<pswd.length(); i++) {
+            if (Character.isDigit(pswd.charAt(i)))
+                foundDigit = true;
+            if (!Character.isLetterOrDigit(pswd.charAt(i)))
+                foundSymbol = true;
+        }
+        if (!foundDigit || !foundSymbol)
+            throw new IllegalArgumentException("Password must contain at least one number and special");
+    }
+
+    public static void emailValidation (String email) throws IllegalArgumentException {
+        if (email == null ||  !EMAIL_PATTERN.matcher(email).matches())
+            throw new IllegalArgumentException("please enter a valid email");
+    }
 
 }
 
