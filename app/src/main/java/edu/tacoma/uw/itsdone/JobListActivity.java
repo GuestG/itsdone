@@ -34,7 +34,7 @@ import java.util.List;
  *
  * @author Trevor Peters, Max Malyshev
  * @version 1.1
- * @since 5/15/2020
+ * @since 5/27/2020
  */
 public class JobListActivity extends AppCompatActivity {
 
@@ -279,6 +279,7 @@ public class JobListActivity extends AppCompatActivity {
                 return;
             }
             try {
+
                 JSONObject jsonObject = new JSONObject(s);
 
                 if (jsonObject.getBoolean("success")) {

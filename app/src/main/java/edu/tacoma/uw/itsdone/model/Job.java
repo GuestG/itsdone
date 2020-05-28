@@ -10,14 +10,14 @@ import java.util.List;
 /**
  * Class representing a job. Users can create and accept jobs.
  * Job has fields such as title, price, location, and others.
- * @author Max Malyshev
- * @version 1.0
- * @since 2020-05-13
+ * @author Max Malyshev, Trevor Peters
+ * @version 1.1
+ * @since 2020-05-27
  */
 public class Job implements Serializable {
 
     private String mJobId;
-    private String mCreatorId;
+    private String mCreatorUsername;
     private String mTitle;
     private String mCourseShortDesc;
     private String mCourseLongDesc;
@@ -25,7 +25,7 @@ public class Job implements Serializable {
     private String mPrice;
 
     public static final String ID = "jobid";
-    public static final String CREATOR_ID = "jobcreatorid";
+    public static final String CREATOR_USERNAME = "creatorusername";
     public static final String TITLE = "title";
     public static final String SHORT_DESC = "shortdesc";
     public static final String LONG_DESC = "longdesc";
@@ -35,16 +35,16 @@ public class Job implements Serializable {
     /**
      * Constructor for initializing fields
      * @param id SQL primary key
-     * @param cId SQL key of job owner
+     * @param creatorUsername SQL key of job owner
      * @param title string title of the job
      * @param sDesc string short description of job
      * @param lDesc string long description of job
      * @param loc location of job
      * @param pr price the owner is willing to pay for anyone wanting to complete the job.
      */
-    public Job (String id, String cId, String title, String sDesc, String lDesc, String loc, String pr){
+    public Job (String id, String creatorUsername, String title, String sDesc, String lDesc, String loc, String pr){
         mJobId = id;
-        mCreatorId = cId;
+        mCreatorUsername = creatorUsername;
         mTitle = title;
         mCourseShortDesc = sDesc;
         mCourseLongDesc = lDesc;
@@ -53,7 +53,7 @@ public class Job implements Serializable {
     }
 
     public String getJobId() { return mJobId; }
-    public String getCreatorId() { return mCreatorId; }
+    public String getCreatorUsername() { return mCreatorUsername; }
     public String getTitle() { return mTitle; }
     public String getShortDesc() { return mCourseShortDesc; }
     public String getLongDesc() { return mCourseLongDesc; }
@@ -61,7 +61,7 @@ public class Job implements Serializable {
     public String getLocation() { return mLocation; }
 
     public void setJobId(String s) { mJobId = s; }
-    public void setCreatorId(String s) { mCreatorId = s; }
+    public void setCreatorId(String s) { mCreatorUsername = s; }
     public void setTitle(String s) { mTitle = s; }
     public void setShortDesc(String s) { mCourseShortDesc = s; }
     public void setLongDesc(String s) { mCourseLongDesc = s; }
@@ -80,7 +80,7 @@ public class Job implements Serializable {
             JSONArray arr = new JSONArray(jobJson);
             for (int i = 0; i < arr.length(); i++){
                 JSONObject obj = arr.getJSONObject(i);
-                Job job = new Job(obj.getString(Job.ID), obj.getString(Job.CREATOR_ID), obj.getString(Job.TITLE),
+                Job job = new Job(obj.getString(Job.ID), obj.getString(Job.CREATOR_USERNAME), obj.getString(Job.TITLE),
                         obj.getString(Job.SHORT_DESC), obj.getString(Job.LONG_DESC), obj.getString(Job.LOCATION),
                         obj.getString(Job.PRICE));
                 jobList.add(job);

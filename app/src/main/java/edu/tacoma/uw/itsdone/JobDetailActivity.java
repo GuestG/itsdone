@@ -26,8 +26,8 @@ import edu.tacoma.uw.itsdone.model.Job;
  * in a {@link JobListActivity}.
  *
  * @author Trevor Peters, Max Malsyev
- * @version 1.1
- * @since 5/15/2020
+ * @version 1.2
+ * @since 5/27/2020
  */
 public class JobDetailActivity extends AppCompatActivity implements JobAddFragment.AddListener, JobDetailFragment.SaveListener{
 
@@ -111,9 +111,12 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
 
         mJobJSON = new JSONObject();
         try{
-            int memberID = getApplicationContext().getSharedPreferences("userInfo", 0)
-                    .getInt(getString(R.string.memberID), 0);
-            mJobJSON.put("jobCreatorID", memberID);
+            String username = getApplicationContext().getSharedPreferences("userInfo", 0)
+                    .getString(getString(R.string.username), null);
+            if (username == null){
+                throw new NullPointerException();
+            }
+            mJobJSON.put("creatorUsername", username);
             mJobJSON.put("title", job.getTitle());
             mJobJSON.put("shortDesc", job.getShortDesc());
             mJobJSON.put("longDesc", job.getLongDesc());
@@ -125,6 +128,9 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             Toast.makeText(this,"Error with JSON creation on adding a job: " +
                             e.getMessage(),
                     Toast.LENGTH_LONG).show();
+        }  catch (NullPointerException e ){
+        Toast.makeText(this,"Error: please log out and log back in before creating a job",
+                Toast.LENGTH_LONG).show();
         }
     }
 

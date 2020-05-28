@@ -22,8 +22,8 @@ import java.net.URL;
  * launcher activity. this is also the login menu
  *
  * @author Trevor Peters, Max Malyshev
- * @version 1.0
- * @since 5/12
+ * @version 1.1
+ * @since 5/27/20
  */
 public class MainActivity extends AppCompatActivity {
     private JSONObject mMemberJSON;
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.e(mLogin, jsonObject.getString("error"));
                 }
             } catch (JSONException e) {
-                Toast.makeText(getApplicationContext(), "JSON Parsing error on Adding Member"
+                Toast.makeText(getApplicationContext(), "incorrect username/password pair"
                                 + e.getMessage()
                         , Toast.LENGTH_LONG).show();
                 Log.e(mLogin, e.getMessage());

@@ -85,7 +85,7 @@ public class Account implements Serializable {
 
     /**
      * takes an email and throws an exception if it's invalid
-     * 
+     *
      * @param email the email given
      * @throws IllegalArgumentException
      */
