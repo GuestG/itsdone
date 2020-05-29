@@ -23,6 +23,7 @@ public class Job implements Serializable {
     private String mCourseLongDesc;
     private String mLocation;
     private String mPrice;
+    private int mJobPicture;
 
     public static final String ID = "jobid";
     public static final String CREATOR_USERNAME = "creatorusername";
@@ -50,6 +51,7 @@ public class Job implements Serializable {
         mCourseLongDesc = lDesc;
         mPrice = pr;
         mLocation = loc;
+        mJobPicture = 0;
     }
 
     public String getJobId() { return mJobId; }
@@ -59,6 +61,7 @@ public class Job implements Serializable {
     public String getLongDesc() { return mCourseLongDesc; }
     public String getPrice() { return mPrice; }
     public String getLocation() { return mLocation; }
+    public int getPicture() {  mJobPicture = Integer.parseInt(mJobId) % 10; return mJobPicture; }
 
     public void setJobId(String s) { mJobId = s; }
     public void setCreatorId(String s) { mCreatorUsername = s; }
@@ -67,6 +70,7 @@ public class Job implements Serializable {
     public void setLongDesc(String s) { mCourseLongDesc = s; }
     public void setPrice(String s) { mPrice = s; }
     public void setLocation(String s) { mLocation = s; }
+    public void setPicture(int i) { mJobPicture = i; }
 
     /**
      * method for parsing a json file from database into a list of job objects.

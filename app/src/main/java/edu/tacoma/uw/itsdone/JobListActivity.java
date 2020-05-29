@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;
@@ -191,7 +192,7 @@ public class JobListActivity extends AppCompatActivity {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.job_list_content, parent, false);
+                    .inflate(R.layout.card_item, parent, false);
             return new ViewHolder(view);
         }
 
@@ -202,9 +203,20 @@ public class JobListActivity extends AppCompatActivity {
          */
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).getJobId());
+            int [] photos = {
+                    R.drawable.a,
+                    R.drawable.b,
+                    R.drawable.d,
+                    R.drawable.e,
+                    R.drawable.f,
+                    R.drawable.g,
+                    R.drawable.h,
+                    R.drawable.i,
+                    R.drawable.j
+            };
+            holder.mIdView.setText("$"+mValues.get(position).getPrice());
             holder.mContentView.setText(mValues.get(position).getTitle());
-
+            holder.mImageView.setImageResource(photos[mValues.get(position).getPicture()]);
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
         }
@@ -224,11 +236,13 @@ public class JobListActivity extends AppCompatActivity {
         class ViewHolder extends RecyclerView.ViewHolder {
             final TextView mIdView;
             final TextView mContentView;
+            final ImageView mImageView;
 
             ViewHolder(View view) {
                 super(view);
-                mIdView = (TextView) view.findViewById(R.id.id_text);
-                mContentView = (TextView) view.findViewById(R.id.content);
+                mIdView = (TextView) view.findViewById(R.id.card_uname);
+                mContentView = (TextView) view.findViewById(R.id.card_title);
+                mImageView = (ImageView) view.findViewById(R.id.card_background);
             }
         }
     }

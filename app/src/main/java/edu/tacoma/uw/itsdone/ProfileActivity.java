@@ -47,7 +47,6 @@ public class ProfileActivity extends AppCompatActivity {
      * @param view
      */
     public void logout(View view){
-        //TODO username & MemberID can accessed here
 
         SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
                 getSharedPreferences("userInfo", 0);
