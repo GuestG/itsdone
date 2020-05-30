@@ -192,6 +192,7 @@
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/round_button"
                 android:elevation="5dp"
+                android:textColor="#ffffff"
                 android:text="Upload Photo" />
         </RelativeLayout>
 
@@ -227,6 +228,7 @@
                 android:layout_marginRight="0dp"
                 android:layout_marginBottom="0dp"
                 android:background="@drawable/round_button"
+                android:textColor="#ffffff"
                 android:elevation="5dp"
                 android:text="@string/btn_add_job" />
         </RelativeLayout>

@@ -96,6 +96,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/clear"
                 android:onClick="logout"
+                android:textColor="#ffffff"
                 android:text="@string/button_logout" />
 
         </RelativeLayout>

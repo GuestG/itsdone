@@ -84,6 +84,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/clear"
                 android:onClick="loginCheck"
+                android:textColor="#ffffff"
                 android:text="@string/button_login" />
 
         </RelativeLayout>
@@ -115,6 +116,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:onClick="createAccount"
+                android:textColor="#ffffff"
                 android:text="@string/create_account"
                 android:background="@color/clear"/>
 
