@@ -60,7 +60,7 @@ public class JobAddFragment extends Fragment {
         final EditText jobLongDescEditText = v.findViewById(R.id.add_job_long_desc);
         final EditText jobLocationEditText = v.findViewById(R.id.add_job_location);
         final EditText jobPriceEditText = v.findViewById(R.id.add_job_price);
-        Button addButton = v.findViewById(R.id.btn_add_job);
+        Button addButton = v.findViewById(R.id.btn_add_photo);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

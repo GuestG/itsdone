@@ -203,6 +203,7 @@ public class JobListActivity extends AppCompatActivity {
          */
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
+            // array of photos. Should probably be stored somewhere else but this works for now
             int [] photos = {
                     R.drawable.a,
                     R.drawable.b,
