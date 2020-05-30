@@ -125,7 +125,7 @@ public class ProfileActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if (s.startsWith("Unable to add the new Member")) {
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
                 return;
             }
             try {

@@ -114,14 +114,14 @@ public class CreateAccountActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if (s.startsWith("Unable to add the new Member")) {
-                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
                 return;
             }
             try {
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getBoolean("success")) {
                     Toast.makeText(getApplicationContext(), "Member Added successfully"
-                            , Toast.LENGTH_SHORT).show();
+                            , Toast.LENGTH_LONG).show();
                     finish();
                 }
                 else {

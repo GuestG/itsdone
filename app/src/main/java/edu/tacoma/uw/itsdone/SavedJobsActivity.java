@@ -251,7 +251,7 @@ public class SavedJobsActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             if (s.startsWith("Unable to")) {
-                Toast.makeText(getApplicationContext(), "Unable to download" + s, Toast.LENGTH_SHORT)
+                Toast.makeText(getApplicationContext(), "Unable to download" + s, Toast.LENGTH_LONG)
                         .show();
                 return;
             }
@@ -268,7 +268,7 @@ public class SavedJobsActivity extends AppCompatActivity {
 
             } catch (JSONException e) {
                 Toast.makeText(getApplicationContext(), "JSON Error: " + e.getMessage(),
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_LONG).show();
             }
         }
 

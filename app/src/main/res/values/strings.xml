@@ -12,6 +12,7 @@
     <string name="enter_job_location_hint">Enter Job Location</string>
     <string name="enter_job_price_hint">Enter Job Price</string>
 
+
     <string name="btn_add_job">Add Job</string>
 
     <!-- Create Account hints -->
@@ -20,6 +21,7 @@
     <string name="enter_first_name">first name</string>
     <string name="enter_last_name">last name</string>
     <string name="enter_email">email</string>
+    <string name="reputation"> reputation </string>
 
     <!-- SharedPref keys -->
     <string name="signed_in">signed in</string>

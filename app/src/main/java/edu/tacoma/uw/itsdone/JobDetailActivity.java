@@ -191,7 +191,7 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
                 JSONObject jsonObject = new JSONObject(s);
                 if (jsonObject.getBoolean("success")) {
                     Toast.makeText(getApplicationContext(), "successful"
-                            , Toast.LENGTH_SHORT).show();
+                            , Toast.LENGTH_LONG).show();
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Job couldn't be added: "
