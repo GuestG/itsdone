@@ -11,8 +11,10 @@
         android:roundIcon="@mipmap/itsdone"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SavedJobsActivity"></activity>
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".SavedJobsActivity"
+                  android:parentActivityName=".JobListActivity"></activity>
+        <activity android:name=".ProfileActivity"
+                  android:parentActivityName=".JobListActivity"/>
         <activity android:name=".CreateAccountActivity" />
         <activity
             android:name=".MainActivity"

@@ -11,7 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/detail_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         app:title=""
         app:layout_collapseMode="pin"
         app:titleTextColor="#ffffff"
@@ -19,7 +19,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/item_detail_container"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"></androidx.core.widget.NestedScrollView>

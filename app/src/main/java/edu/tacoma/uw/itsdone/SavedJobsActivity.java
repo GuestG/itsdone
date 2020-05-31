@@ -1,6 +1,7 @@
 package edu.tacoma.uw.itsdone;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
@@ -52,6 +53,11 @@ public class SavedJobsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_saved_jobs);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Saved Jobs");
+
+
+
         SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
                 getSharedPreferences("userInfo", 0);
 
