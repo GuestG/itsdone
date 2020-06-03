@@ -40,6 +40,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Back to Login");
     }
 
 

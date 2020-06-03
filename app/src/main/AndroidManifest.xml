@@ -15,7 +15,8 @@
                   android:parentActivityName=".JobListActivity"></activity>
         <activity android:name=".ProfileActivity"
                   android:parentActivityName=".JobListActivity"/>
-        <activity android:name=".CreateAccountActivity" />
+        <activity android:name=".CreateAccountActivity"
+                  android:parentActivityName=".MainActivity"/>/>
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
