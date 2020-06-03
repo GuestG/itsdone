@@ -126,7 +126,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Member couldn't be added: "
-                                    + jsonObject.getString("error")
+                                    + jsonObject.getJSONObject("error").getString("detail")
                             , Toast.LENGTH_LONG).show();
                     Log.e(ADD_MEMBER, jsonObject.getString("error"));
                 }

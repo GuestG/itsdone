@@ -156,9 +156,11 @@ public class ProfileActivity extends AppCompatActivity {
         TextView firstText = findViewById(R.id.first_name);
         TextView lastText = findViewById(R.id.last_name);
         TextView usernameText = findViewById(R.id.username);
+        TextView account_rep = findViewById(R.id.account_rep);
         emailText.setText(mMemberInJSON.getString("email"));
         firstText.setText(mMemberInJSON.getString("firstname"));
         lastText.setText(mMemberInJSON.getString("lastname"));
         usernameText.setText(mMemberInJSON.getString("username"));
+        account_rep.setText("Reputation: " + mMemberInJSON.getString("rating"));
     }
 }

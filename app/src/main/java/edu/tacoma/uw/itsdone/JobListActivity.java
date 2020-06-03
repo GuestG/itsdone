@@ -121,9 +121,7 @@ public class JobListActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        if (mJobList == null){
-            new JobTask().execute(getString(R.string.get_jobs));
-        }
+        new JobTask().execute(getString(R.string.get_jobs));
     }
 
     /**

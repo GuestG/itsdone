@@ -122,6 +122,7 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             mJobJSON.put("longDesc", job.getLongDesc());
             mJobJSON.put("place", job.getLocation());
             mJobJSON.put("price", job.getPrice());
+            mJobJSON.put("photo", "1"); //TODO MAX MAKE THIS WORK -trevor
             new AddJobAsyncTask().execute(url.toString());
 
         } catch (JSONException e){
@@ -192,6 +193,7 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
                 if (jsonObject.getBoolean("success")) {
                     Toast.makeText(getApplicationContext(), "successful"
                             , Toast.LENGTH_LONG).show();
+                    finish();
                 }
                 else {
                     Toast.makeText(getApplicationContext(), "Job couldn't be added: "

@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import edu.tacoma.uw.itsdone.model.Job;
 
 /**
@@ -64,14 +66,19 @@ public class JobAddFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String jobTitle = jobTitleEditText.getText().toString();
-                String jobShortDesc = jobShortDescEditText.getText().toString();
-                String jobLongDesc = jobLongDescEditText.getText().toString();
-                String jobLocation = jobLocationEditText.getText().toString();
-                String jobPrice = jobPriceEditText.getText().toString();
-                Job job = new Job("id","creatorId", jobTitle, jobShortDesc, jobLongDesc, jobLocation, jobPrice);
-                if (mAddListener != null) {
-                    mAddListener.addJob(job);
+                if ((jobPriceEditText.getText().toString().matches("[0-9]+"))) {
+                    String jobTitle = jobTitleEditText.getText().toString();
+                    String jobShortDesc = jobShortDescEditText.getText().toString();
+                    String jobLongDesc = jobLongDescEditText.getText().toString();
+                    String jobLocation = jobLocationEditText.getText().toString();
+                    String jobPrice = jobPriceEditText.getText().toString();
+                    Job job = new Job("id","creatorId", jobTitle, jobShortDesc, jobLongDesc, jobLocation, jobPrice);
+                    if (mAddListener != null) {
+                        mAddListener.addJob(job);
+                    }
+                } else {
+                    Toast.makeText(getContext(), "please enter valid  price (ie 10) ",
+                            Toast.LENGTH_LONG).show();
                 }
             }
         });
