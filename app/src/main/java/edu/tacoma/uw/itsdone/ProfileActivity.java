@@ -35,6 +35,7 @@ import java.net.URL;
 public class ProfileActivity extends AppCompatActivity {
     private JSONObject mMemberOutJSON;
     private JSONObject mMemberInJSON;
+    private String mUsername;
     private String mAccount = "ACCOUNT";
 
 
@@ -44,6 +45,9 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("Profile");
+        SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
+                getSharedPreferences("userInfo", 0);
+        mUsername = getIntent().getStringExtra("username");
         getAccount();
 
     }
@@ -72,10 +76,9 @@ public class ProfileActivity extends AppCompatActivity {
     public void getAccount() {
         StringBuilder url = new StringBuilder(getString(R.string.account));
         mMemberOutJSON = new JSONObject();
-        SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
-                getSharedPreferences("userInfo", 0);
+
         try{
-            mMemberOutJSON.put("memberID", sharedPref.getInt(getString(R.string.memberID), 0));
+            mMemberOutJSON.put("username", mUsername);
             new AccountAsyncTask().execute(url.toString());
         } catch (JSONException e){
             Toast.makeText(this,"Error with JSON creation on login: " +

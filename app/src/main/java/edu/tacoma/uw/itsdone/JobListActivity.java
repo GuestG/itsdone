@@ -2,6 +2,7 @@ package edu.tacoma.uw.itsdone;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -313,6 +314,9 @@ public class JobListActivity extends AppCompatActivity {
 
     public void profile(View view){
         Intent intent = new Intent(this, ProfileActivity.class);
+        SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
+                getSharedPreferences("userInfo", 0);
+        intent.putExtra("username", sharedPref.getString(getString(R.string.username), null));
         startActivity(intent);
     }
 }
