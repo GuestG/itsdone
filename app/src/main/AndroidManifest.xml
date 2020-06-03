@@ -6,9 +6,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/itsdone"
+        android:icon="@mipmap/ic_launcher_its_done"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/itsdone"
+        android:roundIcon="@mipmap/ic_launcher_its_done"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SavedJobsActivity"
