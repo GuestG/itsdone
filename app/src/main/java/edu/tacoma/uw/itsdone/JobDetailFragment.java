@@ -1,5 +1,6 @@
 package edu.tacoma.uw.itsdone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -97,8 +98,16 @@ public class JobDetailFragment extends Fragment {
                 mSaveListener.saveJob(mJob);
             }
         });
-
+        rootView.findViewById(R.id.view_profile_button).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                intent.putExtra("username", mJob.getCreatorUsername());
+                startActivity(intent);
+            }
+        });
         return rootView;
     }
+
 
 }
