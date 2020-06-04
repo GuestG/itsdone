@@ -29,7 +29,8 @@ import edu.tacoma.uw.itsdone.model.Job;
  * @version 1.2
  * @since 5/27/2020
  */
-public class JobDetailActivity extends AppCompatActivity implements JobAddFragment.AddListener, JobDetailFragment.SaveListener{
+public class JobDetailActivity extends AppCompatActivity implements JobAddFragment.AddListener,
+        JobDetailFragment.SaveListener, JobDetailFragment.CancelListener{
 
     private int mUserId;
     public static final String ADD_JOB = "ADD_JOB";
@@ -45,7 +46,6 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         setContentView(R.layout.activity_job_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -132,6 +132,22 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         }  catch (NullPointerException e ){
         Toast.makeText(this,"Error: please log out and log back in before creating a job",
                 Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void cancelJob(Job job) {
+        StringBuilder url = new StringBuilder(getString(R.string.cancelJob));
+
+        mJobJSON = new JSONObject();
+        try{
+            mJobJSON.put("jobID", job.getJobId());
+            new AddJobAsyncTask().execute(url.toString());
+
+        } catch (JSONException e){
+            Toast.makeText(this,"Error with JSON creation on adding a job: " +
+                            e.getMessage(),
+                    Toast.LENGTH_LONG).show();
         }
     }
 

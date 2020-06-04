@@ -1,6 +1,7 @@
 package edu.tacoma.uw.itsdone;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import edu.tacoma.uw.itsdone.model.Job;
 
 /**
@@ -32,9 +35,16 @@ public class JobDetailFragment extends Fragment {
 
     private SaveListener mSaveListener;
 
+    private CancelListener mCancelListener;
+
     public interface SaveListener {
         public void saveJob(Job job);
     }
+
+    public interface CancelListener {
+        void cancelJob(Job job);
+    }
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -51,7 +61,7 @@ public class JobDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
 
         mSaveListener = (SaveListener) getActivity();
-
+        mCancelListener = (CancelListener) getActivity();
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
@@ -87,8 +97,18 @@ public class JobDetailFragment extends Fragment {
                     "Price: " + mJob.getPrice());
         }
 
+        createButtons(rootView);
+
+        return rootView;
+    }
+
+
+    private void createButtons(View rootView){
+        SharedPreferences sharedPref = getContext().getApplicationContext().
+                getSharedPreferences("userInfo", 0);
 
         Button saveButton = rootView.findViewById(R.id.save_job_button);
+
         /**
          * adds a save job listener to the save job button
          */
@@ -98,16 +118,26 @@ public class JobDetailFragment extends Fragment {
                 mSaveListener.saveJob(mJob);
             }
         });
-        rootView.findViewById(R.id.view_profile_button).setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ProfileActivity.class);
-                intent.putExtra("username", mJob.getCreatorUsername());
-                startActivity(intent);
-            }
-        });
-        return rootView;
-    }
 
+        Button profileButton = rootView.findViewById(R.id.view_profile_button);
+        if (mJob.getCreatorUsername().equals(sharedPref.getString(getString(R.string.username), null))) {
+            profileButton.setText("cancel Job");
+            profileButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCancelListener.cancelJob(mJob);
+                }
+            });
+        } else {
+            profileButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                    intent.putExtra("username", mJob.getCreatorUsername());
+                    startActivity(intent);
+                }
+            });
+        }
+    }
 
 }
