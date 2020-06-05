@@ -180,6 +180,7 @@ public class SavedJobsActivity extends AppCompatActivity {
             int [] photos = {
                     R.drawable.a,
                     R.drawable.b,
+                    R.drawable.c,
                     R.drawable.d,
                     R.drawable.e,
                     R.drawable.f,
