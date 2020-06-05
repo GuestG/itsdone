@@ -32,19 +32,14 @@ public class JobDetailFragment extends Fragment {
      * The job this fragment is representing
      */
     private Job mJob;
-
     private SaveListener mSaveListener;
-
     private CancelListener mCancelListener;
+    private CompleteListener mCompleteListener;
+    private String mFromActivity; //activity that started the JobDetailFragment
 
-    public interface SaveListener {
-        public void saveJob(Job job);
-    }
-
-    public interface CancelListener {
-        void cancelJob(Job job);
-    }
-
+    public interface SaveListener { void saveJob(Job job); }
+    public interface CancelListener { void cancelJob(Job job); }
+    public interface CompleteListener { void completeJob(Job job); }
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -62,8 +57,9 @@ public class JobDetailFragment extends Fragment {
 
         mSaveListener = (SaveListener) getActivity();
         mCancelListener = (CancelListener) getActivity();
+        mCompleteListener = (CompleteListener) getActivity();
         super.onCreate(savedInstanceState);
-
+        mFromActivity = getArguments().getString("fromID");
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
@@ -102,24 +98,39 @@ public class JobDetailFragment extends Fragment {
         return rootView;
     }
 
-
+    /**
+     * creates the correct buttons for the job. if a user clicks on their own job,
+     * they can cancel that job. if the user is in their myJobs list. the option to
+     * complete the job will appear.
+     * @param rootView
+     */
     private void createButtons(View rootView){
         SharedPreferences sharedPref = getContext().getApplicationContext().
                 getSharedPreferences("userInfo", 0);
 
         Button saveButton = rootView.findViewById(R.id.save_job_button);
 
-        /**
-         * adds a save job listener to the save job button
-         */
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSaveListener.saveJob(mJob);
-            }
-        });
+        //check where which activity the user came from
+        if("JobListActivity".equals(mFromActivity)) {
+            /** adds a save job listener to the save job button */
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mSaveListener.saveJob(mJob);
+                }
+            });
+        } else {
+            saveButton.setText("Complete Job");
+            saveButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCompleteListener.completeJob(mJob);
+                }
+            });
+        }
 
         Button profileButton = rootView.findViewById(R.id.view_profile_button);
+        //check if the user is looking at their own job
         if (mJob.getCreatorUsername().equals(sharedPref.getString(getString(R.string.username), null))) {
             profileButton.setText("cancel Job");
             profileButton.setOnClickListener(new View.OnClickListener() {

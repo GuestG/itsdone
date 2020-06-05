@@ -30,11 +30,14 @@ import edu.tacoma.uw.itsdone.model.Job;
  * @since 5/27/2020
  */
 public class JobDetailActivity extends AppCompatActivity implements JobAddFragment.AddListener,
-        JobDetailFragment.SaveListener, JobDetailFragment.CancelListener{
+        JobDetailFragment.SaveListener, JobDetailFragment.CancelListener
+        , JobDetailFragment.CompleteListener {
 
     private int mUserId;
     public static final String ADD_JOB = "ADD_JOB";
     private JSONObject mJobJSON;
+    /**the activity that started this one*/
+
 
     /**
      * initializes the activity.
@@ -60,6 +63,7 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
                 arguments.putSerializable(JobDetailFragment.ARG_ITEM_ID,
                         getIntent().getSerializableExtra(JobDetailFragment.ARG_ITEM_ID));
                 JobDetailFragment fragment = new JobDetailFragment();
+                arguments.putString("fromID", getIntent().getStringExtra("fromID"));
                 fragment.setArguments(arguments);
                 getSupportFragmentManager().beginTransaction()
                         .add(R.id.item_detail_container, fragment)
@@ -122,7 +126,7 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             mJobJSON.put("longDesc", job.getLongDesc());
             mJobJSON.put("place", job.getLocation());
             mJobJSON.put("price", job.getPrice());
-            mJobJSON.put("photo", "1"); //TODO MAX MAKE THIS WORK -trevor
+            mJobJSON.put("photo", "1");     //TODO MAX MAKE THIS WORK -trevor
             new AddJobAsyncTask().execute(url.toString());
 
         } catch (JSONException e){
@@ -137,10 +141,29 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
 
     @Override
     public void cancelJob(Job job) {
-        StringBuilder url = new StringBuilder(getString(R.string.cancelJob));
+        StringBuilder url = new StringBuilder(getString(R.string.cancel_job));
 
         mJobJSON = new JSONObject();
         try{
+            mJobJSON.put("jobID", job.getJobId());
+            new AddJobAsyncTask().execute(url.toString());
+
+        } catch (JSONException e){
+            Toast.makeText(this,"Error with JSON creation on adding a job: " +
+                            e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void completeJob(Job job) {
+        StringBuilder url = new StringBuilder(getString(R.string.complete_job));
+
+        mJobJSON = new JSONObject();
+        try{
+            int memberID = getApplicationContext().getSharedPreferences("userInfo", 0)
+                    .getInt(getString(R.string.memberID), 0);
+            mJobJSON.put("memberID", memberID);
             mJobJSON.put("jobID", job.getJobId());
             new AddJobAsyncTask().execute(url.toString());
 

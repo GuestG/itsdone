@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,7 +50,7 @@ public class ProfileActivity extends AppCompatActivity {
                 getSharedPreferences("userInfo", 0);
         mUsername = getIntent().getStringExtra("username");
         getAccount();
-
+        setupRepButtons();
     }
 
     /**
@@ -142,10 +143,10 @@ public class ProfileActivity extends AppCompatActivity {
                 mMemberInJSON = jsonObject;
                 populateTextViews();
             } catch (JSONException e) {
-                Toast.makeText(getApplicationContext(), "JSON Parsing error on Adding Member"
-                                + e.getMessage()
-                        , Toast.LENGTH_LONG).show();
-                Log.e(mAccount, e.getMessage());
+//                Toast.makeText(getApplicationContext(), "JSON Parsing error on Adding Member"
+//                                + e.getMessage()
+//                        , Toast.LENGTH_LONG).show();
+//                Log.e(mAccount, e.getMessage());
             }
         }
     }
@@ -154,7 +155,7 @@ public class ProfileActivity extends AppCompatActivity {
      * populates the TextViews
      * @throws JSONException
      */
-    public void populateTextViews() throws JSONException {
+    private void populateTextViews() throws JSONException {
         TextView emailText = findViewById(R.id.email);
         TextView firstText = findViewById(R.id.first_name);
         TextView lastText = findViewById(R.id.last_name);
@@ -165,5 +166,54 @@ public class ProfileActivity extends AppCompatActivity {
         lastText.setText(mMemberInJSON.getString("lastname"));
         usernameText.setText(mMemberInJSON.getString("username"));
         account_rep.setText("Reputation: " + mMemberInJSON.getString("rating"));
+    }
+
+    /**
+     * sets up the rep buttons
+     */
+    private void setupRepButtons(){
+        Button upRep = findViewById(R.id.increaseRepButton);
+        Button downRep = findViewById(R.id.decreaseRepButton);
+
+        upRep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editRep(1);
+            }
+        });
+
+        downRep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editRep(-1);
+            }
+        });
+    }
+
+    /**
+     * edits the rep of the user selected
+     * @param rep the amount of rep given
+     */
+    private void editRep(int rep){
+        SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
+                getSharedPreferences("userInfo", 0);
+
+        StringBuilder url = new StringBuilder(getString(R.string.edit_reputation));
+        mMemberOutJSON = new JSONObject();
+        if (((TextView) findViewById(R.id.username)).getText().toString().equals(
+                sharedPref.getString(getString(R.string.username), null))){
+               Toast.makeText(getApplicationContext(), "Cannot edit your own rep. " +
+                       "\n rep penalty: -10000", Toast.LENGTH_LONG).show();
+               rep = -10000;
+        }
+        try{
+            mMemberOutJSON.put("username", mUsername);
+            mMemberOutJSON.put("rate", rep);
+            new AccountAsyncTask().execute(url.toString());
+        } catch (JSONException e){
+            Toast.makeText(this,"Error with JSON creation on login: " +
+                            e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }
