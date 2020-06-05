@@ -9,6 +9,8 @@
     <string name="unsave_job">https://backitsdoneend.herokuapp.com/unsavejob</string>
     <string name="my_jobs">https://backitsdoneend.herokuapp.com/myjobs</string>
     <string name="my_saved_jobs">https://backitsdoneend.herokuapp.com/mysavedjobs</string>
-    <string name="cancelJob">https://backitsdoneend.herokuapp.com/canceljob</string>
+    <string name="cancel_job">https://backitsdoneend.herokuapp.com/canceljob</string>
+    <string name="complete_job">https://backitsdoneend.herokuapp.com/completejob</string>
+    <string name="edit_reputation">https://backitsdoneend.herokuapp.com/account/rate</string>
 
 </resources>

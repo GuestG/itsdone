@@ -162,7 +162,7 @@ public class JobListActivity extends AppCompatActivity {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, JobDetailActivity.class);
                     intent.putExtra(JobDetailFragment.ARG_ITEM_ID, item);
-
+                    intent.putExtra("fromID", "JobListActivity");
                     context.startActivity(intent);
                 }
             }
@@ -216,7 +216,12 @@ public class JobListActivity extends AppCompatActivity {
             };
             holder.mIdView.setText("$"+mValues.get(position).getPrice());
             holder.mContentView.setText(mValues.get(position).getTitle());
-            holder.mImageView.setImageResource(photos[mValues.get(position).getPicture()]);
+            //TODO --- MAX, this try catch is here because I was getting index out of bounds for a job
+            try {
+                holder.mImageView.setImageResource(photos[mValues.get(position).getPicture()]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                holder.mImageView.setImageResource(photos[1]);
+            }
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
         }
@@ -312,6 +317,10 @@ public class JobListActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * brings us to the profile page of a specific user.
+     * @param view that called the method
+     */
     public void profile(View view){
         Intent intent = new Intent(this, ProfileActivity.class);
         SharedPreferences sharedPref =getApplicationContext().getApplicationContext().

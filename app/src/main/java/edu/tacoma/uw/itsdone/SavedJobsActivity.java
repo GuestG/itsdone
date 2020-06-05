@@ -136,7 +136,7 @@ public class SavedJobsActivity extends AppCompatActivity {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, JobDetailActivity.class);
                     intent.putExtra(JobDetailFragment.ARG_ITEM_ID, item);
-
+                    intent.putExtra("fromID", "SavedJobsActivity");
                     context.startActivity(intent);
                 }
             }
