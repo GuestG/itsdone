@@ -44,6 +44,8 @@ public class Account implements Serializable {
      * @param pwd password
      */
     public Account (String first, String last, String user, String email, String pwd){
+        passwordValidation(pwd);
+        emailValidation(email);
         mFirstName = first;
         mLastName = last;
         mUsername = user;
@@ -72,7 +74,7 @@ public class Account implements Serializable {
     public static void passwordValidation(String pswd) throws IllegalArgumentException {
         boolean foundDigit = false, foundSymbol = false;
         if  (pswd == null || pswd.length() < MIN_PASSWORD_LENGTH)
-            throw new IllegalArgumentException("Password be " + MIN_PASSWORD_LENGTH + " or more characters long");
+            throw new IllegalArgumentException("Password must be " + MIN_PASSWORD_LENGTH + " or more characters long");
         for (int i=0; i<pswd.length(); i++) {
             if (Character.isDigit(pswd.charAt(i)))
                 foundDigit = true;
