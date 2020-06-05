@@ -32,6 +32,7 @@ public class Job implements Serializable {
     public static final String LONG_DESC = "longdesc";
     public static final String LOCATION = "place";
     public static final String PRICE = "price";
+    public static final String PHOTO = "photo";
 
     /**
      * Constructor for initializing fields
@@ -61,7 +62,7 @@ public class Job implements Serializable {
     public String getLongDesc() { return mCourseLongDesc; }
     public String getPrice() { return mPrice; }
     public String getLocation() { return mLocation; }
-    public int getPicture() {  mJobPicture = Integer.parseInt(mJobId) % 10; return mJobPicture; }
+    public int getPicture() { return mJobPicture; }
 
     public void setJobId(String s) { mJobId = s; }
     public void setCreatorId(String s) { mCreatorUsername = s; }
@@ -87,6 +88,7 @@ public class Job implements Serializable {
                 Job job = new Job(obj.getString(Job.ID), obj.getString(Job.CREATOR_USERNAME), obj.getString(Job.TITLE),
                         obj.getString(Job.SHORT_DESC), obj.getString(Job.LONG_DESC), obj.getString(Job.LOCATION),
                         obj.getString(Job.PRICE));
+                job.setPicture(obj.getInt(Job.PHOTO));
                 jobList.add(job);
             }
         }

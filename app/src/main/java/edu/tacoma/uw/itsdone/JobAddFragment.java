@@ -69,10 +69,13 @@ public class JobAddFragment extends Fragment {
         final int[] integers = {0,1,2,3,4,5,6,7,8,9}; //this is so dumb
         for (int i = 0; i < 10; i++){
             Button PhotoButton = v.findViewById(ids[i]);
+            final int index = i;
             PhotoButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //photoIndex = integers[i];
+                    photoIndex = index;
+                    Toast.makeText(getContext(), "picture button clicked. id=" + index,
+                            Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -81,6 +84,8 @@ public class JobAddFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "adding job. photo id =" + photoIndex,
+                        Toast.LENGTH_LONG).show();
                 if ((jobPriceEditText.getText().toString().matches("[0-9]+"))) {
                     String jobTitle = jobTitleEditText.getText().toString();
                     String jobShortDesc = jobShortDescEditText.getText().toString();
