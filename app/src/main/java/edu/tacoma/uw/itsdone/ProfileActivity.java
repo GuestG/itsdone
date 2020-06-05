@@ -1,8 +1,11 @@
 package edu.tacoma.uw.itsdone;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -49,7 +52,9 @@ public class ProfileActivity extends AppCompatActivity {
         SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
                 getSharedPreferences("userInfo", 0);
         mUsername = getIntent().getStringExtra("username");
-        getAccount();
+        if(checkNetwork()) {
+            getAccount();
+        }
         setupRepButtons();
     }
 
@@ -195,6 +200,9 @@ public class ProfileActivity extends AppCompatActivity {
      * @param rep the amount of rep given
      */
     private void editRep(int rep){
+        if (!checkNetwork()){
+            return;
+        }
         SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
                 getSharedPreferences("userInfo", 0);
 
@@ -215,5 +223,21 @@ public class ProfileActivity extends AppCompatActivity {
                             e.getMessage(),
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    /**
+     * checks if there is an active network connection
+     */
+    private boolean checkNetwork(){
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
+        }
+        Toast.makeText(this,
+                "No network connection available. Please Try again later",
+                Toast.LENGTH_LONG).show();
+        return false;
     }
 }

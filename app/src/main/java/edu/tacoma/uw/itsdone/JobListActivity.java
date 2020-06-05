@@ -377,4 +377,5 @@ public class JobListActivity extends AppCompatActivity {
         intent.putExtra("username", sharedPref.getString(getString(R.string.username), null));
         startActivity(intent);
     }
+
 }
