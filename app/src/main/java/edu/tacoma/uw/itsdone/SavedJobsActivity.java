@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;
@@ -164,7 +165,7 @@ public class SavedJobsActivity extends AppCompatActivity {
         @Override
         public SavedJobsActivity.SimpleItemRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.job_list_content, parent, false);
+                    .inflate(R.layout.card_item, parent, false);
             return new SavedJobsActivity.SimpleItemRecyclerViewAdapter.ViewHolder(view);
         }
 
@@ -175,9 +176,21 @@ public class SavedJobsActivity extends AppCompatActivity {
          */
         @Override
         public void onBindViewHolder(final SavedJobsActivity.SimpleItemRecyclerViewAdapter.ViewHolder holder, int position) {
-            holder.mIdView.setText(mValues.get(position).getJobId());
+            // array of photos. Should probably be stored somewhere else but this works for now
+            int [] photos = {
+                    R.drawable.a,
+                    R.drawable.b,
+                    R.drawable.d,
+                    R.drawable.e,
+                    R.drawable.f,
+                    R.drawable.g,
+                    R.drawable.h,
+                    R.drawable.i,
+                    R.drawable.j
+            };
+            holder.mIdView.setText(mValues.get(position).getPrice());
             holder.mContentView.setText(mValues.get(position).getTitle());
-
+            holder.mImageView.setImageResource(photos[mValues.get(position).getPicture()]);
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
         }
@@ -197,11 +210,13 @@ public class SavedJobsActivity extends AppCompatActivity {
         class ViewHolder extends RecyclerView.ViewHolder {
             final TextView mIdView;
             final TextView mContentView;
+            final ImageView mImageView;
 
             ViewHolder(View view) {
                 super(view);
-                mIdView = (TextView) view.findViewById(R.id.id_text);
-                mContentView = (TextView) view.findViewById(R.id.content);
+                mIdView = (TextView) view.findViewById(R.id.card_title);
+                mContentView = (TextView) view.findViewById(R.id.card_uname);
+                mImageView = view.findViewById(R.id.card_background);
             }
         }
     }

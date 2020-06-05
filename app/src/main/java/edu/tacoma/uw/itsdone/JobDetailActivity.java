@@ -122,13 +122,12 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             mJobJSON.put("longDesc", job.getLongDesc());
             mJobJSON.put("place", job.getLocation());
             mJobJSON.put("price", job.getPrice());
-            mJobJSON.put("photo", "1"); //TODO MAX MAKE THIS WORK -trevor
+            mJobJSON.put("photo", job.getPicture()); //TODO MAX MAKE THIS WORK -trevor
             new AddJobAsyncTask().execute(url.toString());
 
         } catch (JSONException e){
             Toast.makeText(this,"Error with JSON creation on adding a job: " +
-                            e.getMessage(),
-                    Toast.LENGTH_LONG).show();
+                            e.getMessage(), Toast.LENGTH_LONG).show();
         }  catch (NullPointerException e ){
         Toast.makeText(this,"Error: please log out and log back in before creating a job",
                 Toast.LENGTH_LONG).show();
