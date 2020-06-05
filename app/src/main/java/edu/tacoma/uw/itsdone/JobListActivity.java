@@ -3,6 +3,8 @@ package edu.tacoma.uw.itsdone;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -18,6 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import data.JobDB;
 import edu.tacoma.uw.itsdone.model.Job;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -47,6 +51,7 @@ public class JobListActivity extends AppCompatActivity {
     private boolean mTwoPane;
     private List<Job> mJobList;
     private RecyclerView mRecyclerView;
+    private JobDB mJobDB;
 
     /**
      * initializes and creates the activity.
@@ -122,7 +127,29 @@ public class JobListActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        new JobTask().execute(getString(R.string.get_jobs));
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            if (mJobList == null) {
+                new JobTask().execute(getString(R.string.get_jobs));
+            }
+        }
+        else {
+            Toast.makeText(this,
+                    "No network connection available. Displaying locally stored data",
+                    Toast.LENGTH_SHORT).show();
+
+            if (mJobDB == null) {
+                mJobDB = new JobDB(this);
+            }
+            if (mJobList == null) {
+                mJobList = mJobDB.getCourses();
+                setupRecyclerView(mRecyclerView);
+
+            }
+        }
+
     }
 
     /**
@@ -300,12 +327,32 @@ public class JobListActivity extends AppCompatActivity {
                 return;
             }
             try {
-
                 JSONObject jsonObject = new JSONObject(s);
 
                 if (jsonObject.getBoolean("success")) {
                     mJobList = Job.parseJobJson(
                             jsonObject.getString("names"));
+                    if (mJobDB == null) {
+                        mJobDB = new JobDB(getApplicationContext());
+                    }
+
+                    // Delete old data so that you can refresh the local
+                    // database with the network data.
+                    mJobDB.deleteJobs();
+
+                    // Also, add to the local database
+                    for (int i=0; i<mJobList.size(); i++) {
+                        Job job = mJobList.get(i);
+                        mJobDB.insertJob(job.getJobId(),
+                                job.getCreatorUsername(),
+                                job.getTitle(),
+                                job.getShortDesc(),
+                                job.getLongDesc(),
+                                job.getLocation(),
+                                job.getPrice(),
+                                job.getPicture());
+                    }
+
                     if (!mJobList.isEmpty()) {
                         setupRecyclerView((RecyclerView) mRecyclerView);
                     }
