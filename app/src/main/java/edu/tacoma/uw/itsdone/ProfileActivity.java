@@ -148,10 +148,7 @@ public class ProfileActivity extends AppCompatActivity {
                 mMemberInJSON = jsonObject;
                 populateTextViews();
             } catch (JSONException e) {
-//                Toast.makeText(getApplicationContext(), "JSON Parsing error on Adding Member"
-//                                + e.getMessage()
-//                        , Toast.LENGTH_LONG).show();
-//                Log.e(mAccount, e.getMessage());
+
             }
         }
     }
