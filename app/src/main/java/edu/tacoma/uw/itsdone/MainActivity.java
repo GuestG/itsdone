@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private JSONObject mMemberJSON;
     public static final String mLogin = "Login";
     /** true when testing */
-    public static boolean TESTING = true;
+    public static boolean TESTING = false;
 
     /**
      * call super.onCreate and also checks if the user was already logged in.

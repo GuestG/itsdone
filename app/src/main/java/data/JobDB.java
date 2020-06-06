@@ -12,6 +12,12 @@ import java.util.List;
 import edu.tacoma.uw.itsdone.R;
 import edu.tacoma.uw.itsdone.model.Job;
 
+/**
+ * a class to store the jobs incase there is no internet connection
+ * @author Trevor Peters
+ * @version 1.0
+ * @since 6/4/2020
+ */
 public class JobDB {
     public static final int DB_VERSION = 1;
     public static final String DB_NAME = "Job.db";
@@ -101,7 +107,9 @@ public class JobDB {
     }
 
 
-
+    /**
+     * a helper for the job database. 
+     */
     class JobDBHelper extends SQLiteOpenHelper {
 
         private final String CREATE_JOB_SQL;
