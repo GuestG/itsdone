@@ -108,7 +108,7 @@ public class JobDB {
 
 
     /**
-     * a helper for the job database. 
+     * a helper for the job database.
      */
     class JobDBHelper extends SQLiteOpenHelper {
 
