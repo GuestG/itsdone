@@ -210,9 +210,8 @@ public class ProfileActivity extends AppCompatActivity {
         mMemberOutJSON = new JSONObject();
         if (((TextView) findViewById(R.id.username)).getText().toString().equals(
                 sharedPref.getString(getString(R.string.username), null))){
-               Toast.makeText(getApplicationContext(), "Cannot edit your own rep. " +
-                       "\n rep penalty: -10000", Toast.LENGTH_LONG).show();
-               rep = -10000;
+               Toast.makeText(getApplicationContext(), "Cannot edit your own rep. ", Toast.LENGTH_LONG).show();
+
         }
         try{
             mMemberOutJSON.put("username", mUsername);
