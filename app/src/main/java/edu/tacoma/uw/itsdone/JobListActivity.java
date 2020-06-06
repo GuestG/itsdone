@@ -243,14 +243,10 @@ public class JobListActivity extends AppCompatActivity {
                     R.drawable.j
 
             };
-            holder.mIdView.setText("$"+mValues.get(position).getPrice());
+            holder.mIdView.setText(mValues.get(position).getCreatorUsername());
             holder.mContentView.setText(mValues.get(position).getTitle());
-            //TODO --- MAX, this try catch is here because I was getting index out of bounds for a job
-            try {
-                holder.mImageView.setImageResource(photos[mValues.get(position).getPicture()]);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                holder.mImageView.setImageResource(photos[1]);
-            }
+            holder.mPriceButton.setText("$"+mValues.get(position).getPrice());
+            holder.mImageView.setImageResource(photos[mValues.get(position).getPicture()]);
             holder.itemView.setTag(mValues.get(position));
             holder.itemView.setOnClickListener(mOnClickListener);
         }
@@ -271,12 +267,13 @@ public class JobListActivity extends AppCompatActivity {
             final TextView mIdView;
             final TextView mContentView;
             final ImageView mImageView;
-
+            final Button mPriceButton;
             ViewHolder(View view) {
                 super(view);
                 mIdView = (TextView) view.findViewById(R.id.card_uname);
                 mContentView = (TextView) view.findViewById(R.id.card_title);
                 mImageView = (ImageView) view.findViewById(R.id.card_background);
+                mPriceButton = (Button) view.findViewById(R.id.btn_view);
             }
         }
     }
