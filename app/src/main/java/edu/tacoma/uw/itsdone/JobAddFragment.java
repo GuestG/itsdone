@@ -69,7 +69,6 @@ public class JobAddFragment extends Fragment {
         final EditText jobPriceEditText = v.findViewById(R.id.add_job_price);
         int[] ids = {R.id.photo0,R.id.photo1,R.id.photo2,R.id.photo3,R.id.photo4,R.id.photo5,
                 R.id.photo6,R.id.photo7,R.id.photo8,R.id.photo9};
-        final int[] integers = {0,1,2,3,4,5,6,7,8,9}; //this is so dumb
         for (int i = 0; i < 10; i++){
             Button PhotoButton = v.findViewById(ids[i]);
             final int index = i;
@@ -77,6 +76,8 @@ public class JobAddFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     photoIndex = index;
+                    Toast.makeText(getContext(), "selected photo",
+                            Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -102,6 +103,8 @@ public class JobAddFragment extends Fragment {
                 }
             }
         });
+
+
         return v;
     }
 }

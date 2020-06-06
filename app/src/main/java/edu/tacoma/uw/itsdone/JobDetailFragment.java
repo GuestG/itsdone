@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import edu.tacoma.uw.itsdone.model.Job;
 /**
@@ -57,6 +58,7 @@ public class JobDetailFragment extends Fragment {
         mCancelListener = (CancelListener) getActivity();
         mCompleteListener = (CompleteListener) getActivity();
         super.onCreate(savedInstanceState);
+
         mFromActivity = getArguments().getString("fromID");
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Load the dummy content specified by the fragment
@@ -147,6 +149,24 @@ public class JobDetailFragment extends Fragment {
                 }
             });
         }
+
+        com.google.android.material.floatingactionbutton.FloatingActionButton shareButton = rootView.findViewById(R.id.share_btn);
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(Intent.ACTION_SEND);
+                myIntent.setType("text/plain");
+                String shareSub = "Want to earn $" + mJob.getPrice() + "? Check out this job: " + mJob.getTitle();
+                String shareBody = "" + mJob.getTitle() + "\n" +
+                        "Reward cash: $" + mJob.getPrice() + "\n" +
+                        mJob.getLongDesc() + "\n" +
+                        "Location: " + mJob.getLocation() + "\n" +
+                        "see more on the 'its done' app.";
+                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+                myIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                startActivity(Intent.createChooser(myIntent, "Share Job:"));
+            }
+        });
     }
 
 }

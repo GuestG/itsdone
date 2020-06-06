@@ -131,7 +131,7 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             mJobJSON.put("longDesc", job.getLongDesc());
             mJobJSON.put("place", job.getLocation());
             mJobJSON.put("price", job.getPrice());
-            mJobJSON.put("photo", job.getPicture()); //TODO MAX MAKE THIS WORK -trevor
+            mJobJSON.put("photo", job.getPicture());
             if (checkNetwork()) {
                 new AddJobAsyncTask().execute(url.toString());
             }
