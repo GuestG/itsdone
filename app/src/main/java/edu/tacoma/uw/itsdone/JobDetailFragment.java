@@ -9,10 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import edu.tacoma.uw.itsdone.model.Job;
-
 /**
  * This fragment displays all info on the job, through the use of loading
  * data from the database.

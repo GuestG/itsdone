@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -90,7 +92,7 @@ public class SavedJobsActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
-        if (mJobList == null){
+        if (mJobList == null && checkNetwork()){
             new SavedJobsActivity.JobTask().execute(getString(R.string.my_saved_jobs));
         }
     }
@@ -294,6 +296,22 @@ public class SavedJobsActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    /**
+     * checks if there is an active network connection
+     */
+    private boolean checkNetwork(){
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
+        }
+        Toast.makeText(this,
+                "No network connection available. Please Try again later",
+                Toast.LENGTH_LONG).show();
+        return false;
     }
 
 }

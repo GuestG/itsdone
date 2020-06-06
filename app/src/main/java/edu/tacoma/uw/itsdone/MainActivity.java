@@ -28,7 +28,8 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
     private JSONObject mMemberJSON;
     public static final String mLogin = "Login";
-
+    /** true when testing */
+    public static boolean TESTING = true;
 
     /**
      * call super.onCreate and also checks if the user was already logged in.
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref =getApplicationContext().getApplicationContext().
                 getSharedPreferences("userInfo", 0);
         //check if the use is already logged in
-        if (sharedPref.getBoolean(getString(R.string.signed_in), false)) {
+        if (sharedPref.getBoolean(getString(R.string.signed_in), false) && !TESTING) {
             login(sharedPref.getString(getString(R.string.username), null), sharedPref.getInt(getString(R.string.memberID), 0));
         }
     }
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
     /** Called when the user taps the login! button */
     public void loginCheck(View view) {
         StringBuilder url = new StringBuilder(getString(R.string.login));
-        String password = ((EditText) findViewById(R.id.editText)).getText().toString();
-        String username = ((EditText) findViewById(R.id.editText2)).getText().toString();
+        String password = ((EditText) findViewById(R.id.password_edit_text)).getText().toString();
+        String username = ((EditText) findViewById(R.id.sign_in_edit_text)).getText().toString();
         mMemberJSON = new JSONObject();
         try{
             mMemberJSON.put("username", username);

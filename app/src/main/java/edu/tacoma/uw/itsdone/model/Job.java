@@ -44,7 +44,8 @@ public class Job implements Serializable {
      * @param loc location of job
      * @param pr price the owner is willing to pay for anyone wanting to complete the job.
      */
-    public Job (String id, String creatorUsername, String title, String sDesc, String lDesc, String loc, String pr){
+    public Job (String id, String creatorUsername, String title, String sDesc,
+                String lDesc, String loc, String pr){
         mJobId = id;
         mCreatorUsername = creatorUsername;
         mTitle = title;

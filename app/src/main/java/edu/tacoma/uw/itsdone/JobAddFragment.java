@@ -1,5 +1,8 @@
 package edu.tacoma.uw.itsdone;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
@@ -74,8 +77,6 @@ public class JobAddFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     photoIndex = index;
-                    Toast.makeText(getContext(), "picture button clicked. id=" + index,
-                            Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -84,15 +85,13 @@ public class JobAddFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "adding job. photo id =" + photoIndex,
-                        Toast.LENGTH_LONG).show();
                 if ((jobPriceEditText.getText().toString().matches("[0-9]+"))) {
                     String jobTitle = jobTitleEditText.getText().toString();
                     String jobShortDesc = jobShortDescEditText.getText().toString();
                     String jobLongDesc = jobLongDescEditText.getText().toString();
                     String jobLocation = jobLocationEditText.getText().toString();
                     String jobPrice = jobPriceEditText.getText().toString();
-                    Job job = new Job("id","creatorId", jobTitle, jobShortDesc, jobLongDesc, jobLocation, jobPrice);
+                    Job job = new Job("id", "creatorId", jobTitle, jobShortDesc, jobLongDesc, jobLocation, jobPrice);
                     job.setPicture(photoIndex);
                     if (mAddListener != null) {
                         mAddListener.addJob(job);

@@ -1,6 +1,9 @@
 package edu.tacoma.uw.itsdone;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
@@ -93,7 +96,9 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
                     .getInt(getString(R.string.memberID), 0);
             mJobJSON.put("memberID", memberID);
             mJobJSON.put("jobID", job.getJobId());
-            new AddJobAsyncTask().execute(url.toString());
+            if (checkNetwork()) {
+                new AddJobAsyncTask().execute(url.toString());
+            }
 
         } catch (JSONException e){
             Toast.makeText(this,"Error with JSON creation on adding a job: " +
@@ -126,8 +131,10 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
             mJobJSON.put("longDesc", job.getLongDesc());
             mJobJSON.put("place", job.getLocation());
             mJobJSON.put("price", job.getPrice());
-            mJobJSON.put("photo", job.getPicture());
-            new AddJobAsyncTask().execute(url.toString());
+            mJobJSON.put("photo", job.getPicture()); //TODO MAX MAKE THIS WORK -trevor
+            if (checkNetwork()) {
+                new AddJobAsyncTask().execute(url.toString());
+            }
 
         } catch (JSONException e){
             Toast.makeText(this,"Error with JSON creation on adding a job: " +
@@ -145,7 +152,9 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         mJobJSON = new JSONObject();
         try{
             mJobJSON.put("jobID", job.getJobId());
-            new AddJobAsyncTask().execute(url.toString());
+            if (checkNetwork()) {
+                new AddJobAsyncTask().execute(url.toString());
+            }
 
         } catch (JSONException e){
             Toast.makeText(this,"Error with JSON creation on adding a job: " +
@@ -164,7 +173,9 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
                     .getInt(getString(R.string.memberID), 0);
             mJobJSON.put("memberID", memberID);
             mJobJSON.put("jobID", job.getJobId());
-            new AddJobAsyncTask().execute(url.toString());
+            if (checkNetwork()) {
+                new AddJobAsyncTask().execute(url.toString());
+            }
 
         } catch (JSONException e){
             Toast.makeText(this,"Error with JSON creation on adding a job: " +
@@ -264,7 +275,18 @@ public class JobDetailActivity extends AppCompatActivity implements JobAddFragme
         return super.onOptionsItemSelected(item);
     }
 
-
+    private boolean checkNetwork(){
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
+        }
+        Toast.makeText(this,
+                "No network connection available. Please Try again later",
+                Toast.LENGTH_LONG).show();
+        return false;
+    }
 
 
 }
